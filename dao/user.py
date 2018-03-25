@@ -21,6 +21,15 @@ class UserDAO:
         self.data.append(U2)
         self.data.append(U3)
 
+    def getNumberMessagesByUserId(self, id):
+        if id == 123:
+            return 45
+        elif id == 456:
+            return 105
+        elif id == 78:
+            return 300
+        else:
+            return ('Id does not exist: 0')
 
     def getAllUsers(self):
         return self.data

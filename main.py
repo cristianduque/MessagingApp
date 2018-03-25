@@ -12,6 +12,10 @@ def home():
 def getAllChatsByUserId(uid):
     return UserHandler().getAllChatsByUserId(uid)
 
+@app.route('/SocialMessagingApp/users/<int:uid>/messages')
+def getNumberMessagesByUserId(uid):
+    return UserHandler().getNumberMessagesByUserId(uid)
+
 @app.route('/SocialMessagingApp/users')
 def parts():
     handler = UserHandler()

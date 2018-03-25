@@ -22,6 +22,11 @@ class UserHandler:
             mapped_result.append(self.maptoChatDict(r))
         return jsonify(Chats=mapped_result)
 
+    def getNumberMessagesByUserId(self,id):
+        dao = UserDAO()
+        result = dao.getNumberMessagesByUserId(id)
+        return jsonify(Messages = result)
+
     def maptoChatDict(self, row):
         result = {'cid': row[0], 'chatname': row[1]}
         return result
