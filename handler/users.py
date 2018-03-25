@@ -25,10 +25,11 @@ class UserHandler:
     def getNumberMessagesByUserId(self,id):
         dao = UserDAO()
         result = dao.getNumberMessagesByUserId(id)
-        return jsonify(Messages = result)
+        if result == None:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            return jsonify(Messages = result)
 
     def maptoChatDict(self, row):
         result = {'cid': row[0], 'chatname': row[1]}
         return result
-
-
