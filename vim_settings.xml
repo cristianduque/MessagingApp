@@ -26,6 +26,9 @@
       <file name="/fragment.py" timestamp="1521946152523">
         <mark key="[" line="0" column="0" />
       </file>
+      <file name="/a.dummy" timestamp="1522019077514">
+        <mark key="[" line="0" column="0" />
+      </file>
       <file name="$USER_HOME$/PycharmProjects/Pies/Trying.py" timestamp="1521941001371">
         <mark key="[" line="0" column="0" />
       </file>
@@ -50,14 +53,19 @@
         <mark key="]" line="9" column="12" />
         <mark key="." line="9" column="12" />
       </file>
+      <file name="$USER_HOME$/PycharmProjects/MessagingApp/dao/MessageDAO.py" timestamp="1522019866581">
+        <mark key="[" line="6" column="79" />
+        <mark key="]" line="6" column="79" />
+        <mark key="." line="6" column="79" />
+      </file>
     </filemarks>
     <jumps />
     <registers>
       <register name="&quot;" type="4">
-        <text>Hello World</text>
+        <text encoding="base64">Lk9wdGlvbmFsKCkg</text>
       </register>
       <register name="-" type="4">
-        <text>Hello World</text>
+        <text encoding="base64">Lk9wdGlvbmFsKCkg</text>
       </register>
     </registers>
     <search>
