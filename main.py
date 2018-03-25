@@ -2,6 +2,7 @@ from flask import Flask
 from handler.users import UserHandler
 
 app = Flask(__name__)
+app.config["JSON_SORT_KEYS"] = False
 
 @app.route('/')
 def home():
