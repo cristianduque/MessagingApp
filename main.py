@@ -4,6 +4,8 @@ from handler.users import UserHandler
 app = Flask(__name__)
 app.config["JSON_SORT_KEYS"] = False
 
+
+# solo quiero provar que sirve
 @app.route('/')
 def home():
     return "Hello World"
