@@ -14,6 +14,7 @@
         <mark key="]" line="0" column="0" />
         <mark key="." line="0" column="0" />
       </file>
+      <file name="$USER_HOME$/PycharmProjects/MessagingApp/handler/users.py" timestamp="1522016139497" />
       <file name="$USER_HOME$/PycharmProjects/Trying/BBBBBBBBBBBBBBB.py" timestamp="1521940770498">
         <mark key="e" line="0" column="0" />
         <mark key="[" line="0" column="0" />
@@ -44,14 +45,19 @@
         <mark key="]" line="0" column="0" />
         <mark key="." line="0" column="0" />
       </file>
+      <file name="$USER_HOME$/PycharmProjects/MessagingApp/main.py" timestamp="1522016988785">
+        <mark key="[" line="9" column="12" />
+        <mark key="]" line="9" column="12" />
+        <mark key="." line="9" column="12" />
+      </file>
     </filemarks>
     <jumps />
     <registers>
       <register name="&quot;" type="4">
-        <text>handler.</text>
+        <text>Hello World</text>
       </register>
       <register name="-" type="4">
-        <text>handler.</text>
+        <text>Hello World</text>
       </register>
     </registers>
     <search>
@@ -79,6 +85,9 @@
       </shortcut-conflict>
       <shortcut-conflict owner="ide">
         <text>ctrl pressed X</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed F</text>
       </shortcut-conflict>
     </shortcut-conflicts>
   </component>
