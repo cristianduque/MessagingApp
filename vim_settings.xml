@@ -1,35 +1,53 @@
 <application>
   <component name="VimSettings">
     <state version="4" enabled="true" />
-    <globalmarks />
+    <globalmarks>
+      <mark key="I" line="0" column="0" filename="$USER_HOME$/PycharmProjects/Pies/jijijijijijijijijij.py" protocol="file" />
+    </globalmarks>
     <filemarks>
       <file name="$USER_HOME$/PycharmProjects/Trying/hey.py" timestamp="1521931381209">
         <mark key="[" line="0" column="0" />
       </file>
-      <file name="/Dummy.txt" timestamp="1521931393373">
+      <file name="$USER_HOME$/PycharmProjects/MessageApp/users.py" timestamp="1521943721719">
+        <mark key="[" line="1" column="5" />
+        <mark key="]" line="1" column="5" />
+        <mark key="." line="1" column="5" />
+      </file>
+      <file name="/Dummy.txt" timestamp="1521943576475">
         <mark key="e" line="0" column="0" />
         <mark key="[" line="0" column="0" />
         <mark key="]" line="0" column="0" />
         <mark key="." line="0" column="0" />
       </file>
-      <file name="$USER_HOME$/PycharmProjects/Trying/BBBBBBBBBBBBBBB.py" timestamp="1521931774428">
+      <file name="$USER_HOME$/PycharmProjects/Trying/BBBBBBBBBBBBBBB.py" timestamp="1521940770498">
         <mark key="e" line="0" column="0" />
+        <mark key="[" line="0" column="0" />
         <mark key="l" line="0" column="0" />
       </file>
-      <file name="$USER_HOME$/PycharmProjects/Trying/Yey.py" timestamp="1521931285808" />
+      <file name="$USER_HOME$/PycharmProjects/Pies/jijijijijijijijijij.py" timestamp="1521940979522">
+        <mark key="[" line="0" column="0" />
+      </file>
+      <file name="$USER_HOME$/PycharmProjects/MessageApp/main.py" timestamp="1521944054231">
+        <mark key="[" line="9" column="0" />
+        <mark key="]" line="1" column="5" />
+        <mark key="." line="1" column="5" />
+      </file>
       <file name="$USER_HOME$/PycharmProjects/Messages/Class.py" timestamp="1521927181733">
         <mark key="[" line="0" column="0" />
         <mark key="]" line="0" column="0" />
         <mark key="." line="0" column="0" />
       </file>
+      <file name="$USER_HOME$/PycharmProjects/Pies/Trying.py" timestamp="1521941001371">
+        <mark key="[" line="0" column="0" />
+      </file>
     </filemarks>
     <jumps />
     <registers>
       <register name="&quot;" type="4">
-        <text>hello</text>
+        <text>handler.</text>
       </register>
       <register name="-" type="4">
-        <text>hello</text>
+        <text>handler.</text>
       </register>
     </registers>
     <search>
@@ -45,6 +63,15 @@
     <shortcut-conflicts>
       <shortcut-conflict owner="vim">
         <text>ctrl pressed A</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed V</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed I</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed C</text>
       </shortcut-conflict>
     </shortcut-conflicts>
   </component>
