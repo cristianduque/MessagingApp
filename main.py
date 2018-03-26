@@ -1,13 +1,17 @@
 from flask import Flask
-from handler.users import UserHandler
-from handler.chats import ChatHandler
+from handler.UserHandler import UserHandler
+from handler.ChatHandler import ChatHandler
 
 app = Flask(__name__)
 app.config["JSON_SORT_KEYS"] = False
 
 @app.route('/')
 def home():
-    return "Hello World"
+    return "Welcome Intruder!"
+
+@app.route('/SocialMessagingApp/')
+def homeforApp():
+    return "Here goes a nice logo of our app and a very short descripion of what this does\r\n Basically we are doing WhatsApp from scratch. Thanks Professor! Very interesting..."
 
 @app.route('/SocialMessagingApp/users/<int:uid>/chats')
 def getAllChatsByUserId(uid):

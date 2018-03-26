@@ -1,4 +1,4 @@
-from dao.user import UserDAO
+from dao.UserDAO import UserDAO
 class ChatDAO:
     def __init__(self):
 

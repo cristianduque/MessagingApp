@@ -1,5 +1,5 @@
 from flask import jsonify
-from dao.chat import ChatDAO
+from dao.ChatDAO import ChatDAO
 
 class ChatHandler:
     def getAllChats(self):
