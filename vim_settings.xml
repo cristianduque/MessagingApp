@@ -1,6 +1,6 @@
 <application>
   <component name="VimSettings">
-    <state version="4" enabled="true" />
+    <state version="4" enabled="false" />
     <globalmarks>
       <mark key="I" line="0" column="0" filename="$USER_HOME$/PycharmProjects/Pies/jijijijijijijijijij.py" protocol="file" />
     </globalmarks>
@@ -54,9 +54,9 @@
       </file>
       <file name="$USER_HOME$/PycharmProjects/MessagingApp/dao/MessageDAO.py" timestamp="1522026458121">
         <mark key="'" line="6" column="22" />
-        <mark key="[" line="20" column="0" />
-        <mark key="]" line="20" column="0" />
-        <mark key="." line="20" column="0" />
+        <mark key="[" line="21" column="0" />
+        <mark key="]" line="21" column="0" />
+        <mark key="." line="21" column="0" />
         <mark key="^" line="10" column="11" />
       </file>
     </filemarks>
