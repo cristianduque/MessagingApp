@@ -19,10 +19,15 @@ class ChatDAO:
     def getAllChats(self):
         return self.dataChats
 
-    def getAllOwners(self):
-        owner = []
-        for o in self.dataChats:
-            owner.append(o)
+    def getOwnerOfChat(self, cid):
+        for owner in self.dataChats:
+            if cid == owner[0]:
+                return owner[2]
+
+    # def getAllOwners(self):
+    #     owner = []
+    #     for o in self.dataChats:
+    #         owner.append(o)
 
 
     def getAllUsersInChat(self, cid):

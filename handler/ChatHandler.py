@@ -10,9 +10,9 @@ class ChatHandler:
             mapped_result.append(self.mapToDict(r))
         return jsonify(Chats=mapped_result)
 
-    def getAllOwners(self):
+    def getAllOwners(self,cid):
         dao = ChatDAO()
-        result = dao.getAllOwners()
+        result = dao.getOwnerOfChat(cid)
         if result == None:
             return jsonify(Error="NOT FOUND"), 404
         else:

@@ -32,14 +32,16 @@ def chats():
     return handler.getAllChats()
 
 @app.route('/SocialMessagingApp/chats/owners')
-def chatOwners():
+def chatOwner():
     handler = ChatHandler()
-    return handler.getAllOwners()
+    return handler.get
 
 @app.route('/SocialMessagingApp/chats/users/<int:cid>')
 def chatUsers(cid):
     handler = ChatHandler()
     return handler.getAllUsersInChat(cid)
+
+
 
 if __name__ == '__main__':
     app.run()

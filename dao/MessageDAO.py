@@ -1,7 +1,7 @@
 import datetime
 
 class MessageDAO:
-    def ___init___(self):
+    def __init__(self):
 
         M1 = [1, 'Necesito que traigas pan para el desayuno', 45, datetime.date(2023, 11, 25), datetime.time(14, 32, 0, 0), 123]
         M2 = [2, 'Tengo examen esta semana', 105, datetime.date(2023, 12, 25), datetime.time(14, 11, 0, 0), 78]
@@ -12,6 +12,11 @@ class MessageDAO:
         M7 = [7, 'Mami estoy bien', 105, datetime.date(2023, 11, 25), datetime.time(23, 23, 0, 0), 123]
         M8 = [8, 'No puedo subir esta semana. #estudiar', 105, datetime.date(2023, 11, 23), datetime.time(0, 45, 0, 0), 123]
         M9 = [9, 'Donde vamos a comer? #Tengohambre', 105, datetime.date(2023, 11, 25), datetime.time(19, 31, 0, 0), 456]
+
+        RMessage1 = [87, 8, 7]
+        RMessage2 = [89, 8, 9]
+
+        self.reply = [RMessage1, RMessage2]
 
         self.messages = []
         self.messages.append(M1)
@@ -39,7 +44,20 @@ class MessageDAO:
             if uid == m[5]:
                 usermessages.append(m)
         return usermessages
-    def
+    def messageReply(self, mid):
+        replym = []
+        for rm in self.reply:
+            if rm[1] == mid:
+                replym.append(self.messages[rm[2]-1])
+        return replym
+
+
+
+
+
+
+
+
 
 
 
