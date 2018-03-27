@@ -1,7 +1,12 @@
 from flask import jsonify
-from dao.user import UserDAO
+from dao.UserDAO import UserDAO
 
 class UserHandler:
+
+    def mapToDict(self, row):
+        result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4]}
+        return result
+
     def getAllUsers(self):
         dao = UserDAO()
         result = dao.getAllUsers()
@@ -9,10 +14,6 @@ class UserHandler:
         for r in result:
             mapped_result.append(self.mapToDict(r))
         return jsonify(Users=mapped_result)
-
-    def mapToDict(self, row):
-        result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4]}
-        return result
 
     def getAllChatsByUserId(self, id):
         dao = UserDAO()
@@ -25,10 +26,11 @@ class UserHandler:
     def getNumberMessagesByUserId(self,id):
         dao = UserDAO()
         result = dao.getNumberMessagesByUserId(id)
-        return jsonify(Messages = result)
+        if result == None:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            return jsonify(Messages = result)
 
     def maptoChatDict(self, row):
         result = {'cid': row[0], 'chatname': row[1]}
         return result
-
-
