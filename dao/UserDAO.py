@@ -26,33 +26,53 @@ class UserDAO:
     def getAllUsers(self):
         return self.data
 
-    def getAllChatsByUserId(self, id):
-        if id == 123:
-            result = []
+    def getAllChatsByUserId(self, uid):
+        result = []
+        if uid == 123:
             result.append(['45', 'RUM'])
             result.append(['105', 'GroupICOM5016'])
             result.append(['500', 'Los Guerrilleros'])
             return result
-        elif id == 456:
-            result = []
+        elif uid == 456:
             result.append(['45', 'RUM'])
             result.append(['105', 'GroupICOM5016'])
             result.append(['500', 'Los Guerrilleros'])
             result.append(['55', 'Family'])
             return result
-        elif id == 78:
-            result = []
+        elif uid == 78:
             result.append(['45', 'RUM'])
             result.append(['105', 'GrupoICOM5016'])
             result.append(['55', 'Family'])
             return result
-        elif id == 910:
-            result = []
+        elif uid == 910:
             result.append(['45', 'RUM'])
             result.append(['500', 'Los Guerrilleros'])
             result.append(['55', 'Family'])
             return result
         else:
-            return []
+            return result
+
+    def contactlistofUser(self, uid):
+        result = []
+        if uid == 123:
+            return result
+        elif uid == 456:
+            result.append(self.data[0])
+            result.append(self.data[2])
+            result.append(self.data[3])
+
+            return result
+        elif uid == 78:
+            result.append(self.data[0])
+            return result
+        elif uid == 910:
+            result.append(self.data[0])
+            result.append(self.data[1])
+            result.append(self.data[2])
+            result.append(self.data[3])
+            return result
+        else:
+            return result
+
 
 
