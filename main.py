@@ -13,7 +13,7 @@ app.config["JSON_SORT_KEYS"] = False
 def home():
     return "Welcome Intruder!"
 
-@app.route('/login')
+@app.route('/SocialMessagingApp/login')
 def login():
     return "LOGIN GOES HERE"
 
