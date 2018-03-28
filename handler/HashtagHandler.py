@@ -12,6 +12,8 @@ class HashtagHandler:
 
     def getAllhashtags(self):
         hash = HashtagDao().allHashtags()
+        if hash == None:
+            return jsonify(Error="NOT FOUND"), 404
         result = []
         for h in hash:
             result.append(self.maptoDicHash(h))
@@ -19,6 +21,8 @@ class HashtagHandler:
 
     def getmessageswithhash(self):
         hash = HashtagDao().messageswithHashtag()
+        if hash == None:
+            return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in hash:
             result.append(self.maptoDicMessage(m))
@@ -26,6 +30,8 @@ class HashtagHandler:
 
     def getmessagewithhas(self, hashtext):
         hash = HashtagDao().messageWSpecificHash(hashtext)
+        if hash == None:
+            return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in hash:
             result.append(self.maptoDicMessage(m))

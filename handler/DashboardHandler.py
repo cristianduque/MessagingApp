@@ -4,6 +4,8 @@ from flask import jsonify
 class DashboardHandler:
     def dashboard(self):
         dao = DashboardDAO().dashboardInfo()
+        if dao == None:
+            return jsonify(Error="NOT FOUND"), 404
         mapped = self.mappedDashboard(dao)
         return jsonify(Dashboard=mapped)
 

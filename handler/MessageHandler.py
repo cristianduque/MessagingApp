@@ -10,6 +10,8 @@ class MessageHandler:
 
     def getAllMessages(self):
         messages = MessageDAO().allMessages()
+        if messages == None:
+            return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
             result.append(self.maptoDicMessage(m))
@@ -17,6 +19,8 @@ class MessageHandler:
 
     def getMessagesFromChat(self, cid):
         messages = MessageDAO().messagesFromChat(cid)
+        if messages == None:
+            return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
             result.append(self.maptoDicMessage(m))
@@ -24,6 +28,8 @@ class MessageHandler:
 
     def getMessagesFromUser(self, uid):
         messages = MessageDAO().messagesFromUser(uid)
+        if messages == None:
+            return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
             result.append(self.maptoDicMessage(m))
@@ -31,6 +37,8 @@ class MessageHandler:
 
     def getMessageReplies(self, mid):
         messages = MessageDAO().messageReply(mid)
+        if messages == None:
+            return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
             result.append(self.maptoDicMessage(m))
