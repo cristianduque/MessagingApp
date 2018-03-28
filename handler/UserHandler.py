@@ -10,6 +10,8 @@ class UserHandler:
     def getAllUsers(self):
         dao = UserDAO()
         result = dao.getAllUsers()
+        if result == None:
+            return jsonify(Error="NOT FOUND"), 404
         mapped_result = []
         for r in result:
             mapped_result.append(self.mapToDict(r))
@@ -18,6 +20,8 @@ class UserHandler:
     def getAllChatsByUserId(self, id):
         dao = UserDAO()
         result = dao.getAllChatsByUserId(id)
+        if result == None:
+            return jsonify(Error="NOT FOUND"), 404
         mapped_result = []
         for r in result:
             mapped_result.append(self.maptoChatDict(r))

@@ -13,6 +13,8 @@ class ContactListHandler:
 
     def getAllContactLists(self):
         contactList = ContactListDAO().allContactLists()
+        if contactList == None:
+            return jsonify(Error="NOT FOUND"), 404
         result = []
         for cl in contactList:
             result.append(self.maptoDicContactList(cl))
@@ -20,8 +22,10 @@ class ContactListHandler:
 
     def getUsersInContactList(self, uid):
         users = ContactListDAO().contactlistofUser(uid)
+        if users == None:
+            return jsonify(Error="NOT FOUND"), 404
         result = []
         for u in users:
-            result.append(self.maptoDic(u))
+            result.append(self.mapToDict(u))
         return jsonify(AllUsersInCOntactList=result)
 
