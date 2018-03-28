@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.UserDAO import UserDAO
 
+
 class UserHandler:
 
     def mapToDict(self, row):
