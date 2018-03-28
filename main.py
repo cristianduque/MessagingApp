@@ -4,6 +4,7 @@ from handler.ChatHandler import ChatHandler
 from handler.ContactListHandler import ContactListHandler
 from handler.HashtagHandler import HashtagHandler
 from handler.MessageHandler import MessageHandler
+from handler.DashboardHandler import DashboardHandler
 
 app = Flask(__name__)
 app.config["JSON_SORT_KEYS"] = False
@@ -18,11 +19,12 @@ def login():
 
 @app.route('/SocialMessagingApp/')
 def homeforApp():
-    return "Here goes a nice logo of our app and a very short descripion of what this does\r\n Basically we are doing WhatsApp from scratch. Thanks Professor! Very interesting..."
+    return "Here goes a nice logo of our app and a very short descripion of what this does\n Basically we are doing WhatsApp from scratch. Thanks Professor! Very interesting..."
 
 @app.route('/SocialMessagingApp/dashboard')
-def dashboard():
-    
+def dashboardsiplay():
+    handler = DashboardHandler()
+    return handler.dashboard()
 
 @app.route('/SocialMessagingApp/users/<int:uid>/chats')
 def getAllChatsByUserId(uid):
@@ -80,6 +82,27 @@ def contactsOfUsers(uid):
 def allContactList():
     handler = ContactListHandler()
     return handler.getAllContactLists()
+
+@app.route('/SocialMessagingApp/dislikes')
+def getalldislikes():
+    handler = MessageHandler()
+    return handler.getalldislikes()
+
+@app.route('/SocialMessagingApp/likes')
+def getalllikes():
+    handler = MessageHandler()
+    return handler.getalllikes()
+
+@app.route('/SocialMessagingApp/message/<int:mid>/likes')
+def getlikesinmessage(mid):
+    handler = MessageHandler()
+    return handler.getmessagelikes(mid)
+
+@app.route('/SocialMessagingApp/message/<int:mid>/dislikes')
+def getdislikesinmessage(mid):
+    handler = MessageHandler()
+    return handler.getmessagedislikes(mid)
+
 
 if __name__ == '__main__':
     app.run()

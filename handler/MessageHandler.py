@@ -51,7 +51,7 @@ class MessageHandler:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for l in dao:
-            result.append(self.mapdislike(l))
+            result.append(self.mapdislikes(l))
         return jsonify(AllDislikes=result)
 
     def getmessagedislikes(self, mid):
@@ -63,27 +63,14 @@ class MessageHandler:
             result.append(self.mapdislikes(l))
         return jsonify(LikeInMessage=result)
 
-    def getmessageslikes(self, mid):
-        dao = MessageDAO().messagesLikes(mid)
+    def getmessagelikes(self, mid):
+        dao = MessageDAO().messageLikes(mid)
         if dao == None:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for l in dao:
-            result.append(self.maplikes)
+            result.append(self.maplikes(l))
         return jsonify(DislikesInMessage=result)
-
-    def Dashboar(self):
-        numdis = MessageDAO().countDislikes()
-        numlike = MessageDAO().countLikes()
-        numMessage = MessageDAO().countMessages()
-        numReply = MessageDAO().countReplies()
-        hashtags = HashtagDao().allHashtags()[0]
-
-
-        return jsonify()
-
-
-
 
     def mapdislikes(self, d):
         return {'dislikeid': d[0], 'messagesDisliked': d[1], 'userThatDisliked': d[2]}
