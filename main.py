@@ -12,9 +12,17 @@ app.config["JSON_SORT_KEYS"] = False
 def home():
     return "Welcome Intruder!"
 
+@app.route('/login')
+def login():
+    return "LOGIN GOES HERE"
+
 @app.route('/SocialMessagingApp/')
 def homeforApp():
     return "Here goes a nice logo of our app and a very short descripion of what this does\r\n Basically we are doing WhatsApp from scratch. Thanks Professor! Very interesting..."
+
+@app.route('/SocialMessagingApp/dashboard')
+def dashboard():
+    
 
 @app.route('/SocialMessagingApp/users/<int:uid>/chats')
 def getAllChatsByUserId(uid):
@@ -75,3 +83,5 @@ def allContactList():
 
 if __name__ == '__main__':
     app.run()
+
+
