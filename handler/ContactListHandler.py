@@ -22,6 +22,6 @@ class ContactListHandler:
         users = ContactListDAO().contactlistofUser(uid)
         result = []
         for u in users:
-            result.append(self.maptoDic(u))
+            result.append(self.mapToDict(u))
         return jsonify(AllUsersInCOntactList=result)
 

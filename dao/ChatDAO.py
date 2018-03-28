@@ -22,13 +22,9 @@ class ChatDAO:
     def getOwnerOfChat(self, cid):
         for owner in self.dataChats:
             if cid == owner[0]:
-                return owner[2]
-
-    # def getAllOwners(self):
-    #     owner = []
-    #     for o in self.dataChats:
-    #         owner.append(o)
-
+                for u in self.userData:
+                    if u[0] == owner[2]:
+                        return u
 
     def getAllUsersInChat(self, cid):
         result = []

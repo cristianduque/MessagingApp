@@ -3,7 +3,7 @@ from flask import jsonify
 class HashtagHandler:
 
     def maptoDicHash(self, hash):
-        mapped = {'HashtagId': hash[0], 'Hashtag': hash[2]}
+        mapped = {'HashtagId': hash[0], 'Hashtag': hash[1]}
         return mapped
 
     def maptoDicMessage(self, m):
