@@ -26,11 +26,11 @@ def dashboardsiplay():
     handler = DashboardHandler()
     return handler.dashboard()
 
-@app.route('/SocialMessagingApp/users/<int:uid>/chats')
+@app.route('/SocialMessagingApp/user/<int:uid>/chats')
 def getAllChatsByUserId(uid):
     return UserHandler().getAllChatsByUserId(uid)
 
-@app.route('/SocialMessagingApp/users/<int:uid>/messages')
+@app.route('/SocialMessagingApp/user/<int:uid>/messages')
 def getNumberMessagesByUserId(uid):
     return UserHandler().getNumberMessagesByUserId(uid)
 
@@ -49,7 +49,7 @@ def chatOwner(cid):
     handler = ChatHandler()
     return handler.getOwner(cid)
 
-@app.route('/SocialMessagingApp/chats/users/<int:cid>')
+@app.route('/SocialMessagingApp/chat/users/<int:cid>')
 def chatUsers(cid):
     handler = ChatHandler()
     return handler.getAllUsersInChat(cid)
@@ -78,7 +78,7 @@ def contactsOfUsers(uid):
     handler = ContactListHandler()
     return handler.getUsersInContactList(uid)
 
-@app.route('/SocialMessagingApp/contactlist')
+@app.route('/SocialMessagingApp/contactlists')
 def allContactList():
     handler = ContactListHandler()
     return handler.getAllContactLists()

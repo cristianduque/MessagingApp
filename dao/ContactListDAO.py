@@ -19,7 +19,7 @@ class ContactListDAO:
     def contactlistofUser(self, uid):
         result = []
         if uid == 123:
-            return result
+            return
         elif uid == 456:
             result.append(self.users[0])
             result.append(self.users[2])
