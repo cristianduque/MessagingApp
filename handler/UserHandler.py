@@ -33,8 +33,24 @@ class UserHandler:
         if result == None:
             return jsonify(Error="NOT FOUND"), 404
         else:
-            return jsonify(Messages = result)
+            return jsonify(Messages=result)
+
+    def getMessagesByUserId(self,id):
+        dao = UserDAO()
+        result = dao.getMessagesByUserId(id)
+        r = []
+        if result == None:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            for m in result:
+                r.append(self.maptoDicMessage(m))
+
+            return jsonify(Messages=r)
 
     def maptoChatDict(self, row):
         result = {'cid': row[0], 'chatname': row[1]}
         return result
+
+    def maptoDicMessage(self, m):
+        mapped = {'MessageId': m[0], 'Message': m[1], 'Chat': m[2], 'Date': m[3], 'Time': m[4], 'SenderId': m[5]}
+        return mapped

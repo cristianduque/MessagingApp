@@ -30,9 +30,13 @@ def dashboardsiplay():
 def getAllChatsByUserId(uid):
     return UserHandler().getAllChatsByUserId(uid)
 
-@app.route('/SocialMessagingApp/user/<int:uid>/messages')
+@app.route('/SocialMessagingApp/user/<int:uid>/messagesnum')
 def getNumberMessagesByUserId(uid):
     return UserHandler().getNumberMessagesByUserId(uid)
+
+@app.route('/SocialMessagingApp/user/<int:uid>/messages')
+def getMessagesByUserId(uid):
+    return UserHandler().getMessagesByUserId(uid)
 
 @app.route('/SocialMessagingApp/users')
 def users():

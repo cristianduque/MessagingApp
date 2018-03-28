@@ -22,6 +22,13 @@ class UserDAO:
                 a += 1
         return a
 
+    def getMessagesByUserId(self, uid):
+        a = []
+        for m in self.messages:
+            if m[5] == uid:
+                a.append(m)
+        return a
+
     def getAllUsers(self):
         return self.data
 
