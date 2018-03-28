@@ -27,6 +27,6 @@ class DashboardDAO:
 
     def mostusedHashs(self):
         self.partofHashboard.append([self.hashtags[0]])
-    
+
     def activeUsers(self):
         self.partofHashboard.append([self.users[0], self.users[1]])

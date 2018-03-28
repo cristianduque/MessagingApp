@@ -17,7 +17,7 @@ class UserDAO:
 
     def getNumberMessagesByUserId(self, uid):
         a = 0
-        for m in self.message:
+        for m in self.messages:
             if m[5] == uid:
                 a += 1
         return a
@@ -50,8 +50,5 @@ class UserDAO:
             return result
         else:
             return result
-
-
-
 
 
