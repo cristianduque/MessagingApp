@@ -38,12 +38,12 @@ def getNumberMessagesByUserId(uid):
 def getMessagesByUserId(uid):
     return UserHandler().getMessagesByUserId(uid)
 
-@app.route('/SocialMessagingApp/users')
+@app.route('/SocialMessagingApp/user')
 def users():
     handler = UserHandler()
     return handler.getAllUsers()
 
-@app.route('/SocialMessagingApp/chats')
+@app.route('/SocialMessagingApp/chat')
 def chats():
     handler = ChatHandler()
     return handler.getAllChats()
