@@ -45,32 +45,11 @@ class UserDAO:
         return result
 
     def getAllChatsByUserId(self, uid):
+        cursor = self.conn.cursor()
+        query = "select cid, chatname, owner from participates natural inner join chat where uid = %s;"
+        cursor.execute(query, (uid,))
         result = []
-        if uid == 123:
-            result.append(['45', 'RUM'])
-            result.append(['105', 'GroupICOM5016'])
-            result.append(['500', 'Los Guerrilleros'])
-            return result
-        elif uid == 456:
-            result.append(['45', 'RUM'])
-            result.append(['105', 'GroupICOM5016'])
-            result.append(['500', 'Los Guerrilleros'])
-            result.append(['55', 'Family'])
-            return result
-        elif uid == 78:
-            result.append(['45', 'RUM'])
-            result.append(['105', 'GrupoICOM5016'])
-            result.append(['55', 'Family'])
-            return result
-        elif uid == 910:
-            result.append(['45', 'RUM'])
-            result.append(['500', 'Los Guerrilleros'])
-            result.append(['55', 'Family'])
-            return result
-        else:
-            return result
-
-
-
-
-
+        for row in cursor:
+            result.append(row)
+        self.conn.close()
+        return result
