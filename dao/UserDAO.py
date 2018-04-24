@@ -1,4 +1,6 @@
 from dao.MessageDAO import MessageDAO
+import psycopg2
+from config.dbconfig import pg_config
 
 class UserDAO:
     def __init__(self):
@@ -15,6 +17,9 @@ class UserDAO:
         self.data.append(U3)
         self.data.append(U4)
 
+        connection_url = "dbname=%s user=%s password=%s host=%s port=%s" % (pg_config['dbname'], pg_config['user'], pg_config['password'], pg_config['host'], pg_config['port'])
+        self.conn = psycopg2.connect(connection_url)
+
     def getNumberMessagesByUserId(self, uid):
         a = 0
         for m in self.messages:
@@ -30,7 +35,14 @@ class UserDAO:
         return a
 
     def getAllUsers(self):
-        return self.data
+        cursor = self.conn.cursor()
+        query = "select * from users;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        self.conn.close()
+        return result
 
     def getAllChatsByUserId(self, uid):
         result = []
