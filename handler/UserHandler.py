@@ -49,7 +49,7 @@ class UserHandler:
             return jsonify(Messages=r)
 
     def maptoChatDict(self, row):
-        result = {'cid': row[0], 'chatname': row[1]}
+        result = {'cid': row[0], 'chatname': row[1], 'ownerid': row[2]}
         return result
 
     def maptoDicMessage(self, m):
