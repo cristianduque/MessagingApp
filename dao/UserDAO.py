@@ -21,18 +21,22 @@ class UserDAO:
         self.conn = psycopg2.connect(connection_url)
 
     def getNumberMessagesByUserId(self, uid):
-        a = 0
-        for m in self.messages:
-            if m[5] == uid:
-                a += 1
-        return a
+        cursor = self.conn.cursor()
+        query = "select count(*) from message where uid = %s;"
+        cursor.execute(query, (uid,))
+        result = cursor.fetchone()
+        self.conn.close()
+        return result[0]
 
     def getMessagesByUserId(self, uid):
-        a = []
-        for m in self.messages:
-            if m[5] == uid:
-                a.append(m)
-        return a
+        cursor = self.conn.cursor()
+        query = "select * from message where uid = %s;"
+        cursor.execute(query, (uid, ))
+        result = []
+        for row in cursor:
+            result.append(row)
+        self.conn.close()
+        return result
 
     def getAllUsers(self):
         cursor = self.conn.cursor()

@@ -31,10 +31,11 @@ class UserHandler:
     def getNumberMessagesByUserId(self,id):
         dao = UserDAO()
         result = dao.getNumberMessagesByUserId(id)
-        if result == None:
-            return jsonify(Error="NOT FOUND"), 404
-        else:
-            return jsonify(Messages=result)
+        return jsonify(NumberMessages=result)
+        # if result == None:
+        #     return jsonify(Error="NOT FOUND"), 404
+        # else:
+        #     return jsonify(Messages=result)
 
     def getMessagesByUserId(self,id):
         dao = UserDAO()
@@ -53,5 +54,6 @@ class UserHandler:
         return result
 
     def maptoDicMessage(self, m):
-        mapped = {'MessageId': m[0], 'Message': m[1], 'Chat': m[2], 'Date': m[3], 'Time': m[4], 'SenderId': m[5]}
+        mapped = {'MessageId': m[0], 'ChatID': m[1], 'UserID': m[2], 'Date': m[3], 'Text': m[4]}
         return mapped
+
