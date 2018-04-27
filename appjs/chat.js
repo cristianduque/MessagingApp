@@ -8,12 +8,45 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         this.loadMessages = function(){
             // Get the messages from the server through the rest api
-            thisCtrl.messageList.push({"id": 1, "text": "Hola Mi Amigo", "author" : "Bob",
-            "like" : 4, "nolike" : 1});
-            thisCtrl.messageList.push({"id": 2, "text": "Hello World", "author": "Joe",
-                "like" : 11, "nolike" : 12});
 
-            $log.error("Message Loaded: ", JSON.stringify(thisCtrl.messageList));
+             var url = "http://127.0.0.1:5000/SocialMessagingApp/message";
+//            thisCtrl.messageList.push({"id": 1, "text": "Hey", "author" : "Bob",
+//            "like" : 4, "nolike" : 1});
+//            thisCtrl.messageList.push({"id": 2, "text": "Hello World", "author": "Joe",
+            $http.get(url).then(// success call back
+                function (response){
+                // The is the sucess function!
+                // Copy the list of parts in the data variable
+                // into the list of parts in the controller.
+
+                    console.log("response: " + JSON.stringify(response));
+
+                    thisCtrl.messageList = response.data.Message;
+
+            }, // error callback
+            function (response){
+                // This is the error function
+                // If we get here, some error occurred.
+                // Verify which was the cause and show an alert.
+                var status = response.status;
+                if (status == 0){
+                    alert("No hay conexion a Internet");
+                }
+                else if (status == 401){
+                    alert("Su sesion expiro. Conectese de nuevo.");
+                }
+                else if (status == 403){
+                    alert("No esta autorizado a usar el sistema.");
+                }
+                else if (status == 404){
+                    alert("No se encontro la informacion solicitada.");
+                }
+                else {
+                    alert("Error interno del sistema.");
+                }
+            });
+
+            $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
         };
 
         this.postMsg = function(){
