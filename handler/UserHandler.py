@@ -52,11 +52,7 @@ class UserHandler:
         dao = UserDAO()
         result = dao.getNumberMessagesByUserId(id)
         return jsonify(NumberMessages=result)
-        # if result == None:
-        #     return jsonify(Error="NOT FOUND"), 404
-        # else:
-        #     return jsonify(Messages=result)
-
+       
     def getMessagesByUserId(self,id):
         dao = UserDAO()
         result = dao.getMessagesByUserId(id)
