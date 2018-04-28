@@ -4,7 +4,7 @@ from config.dbconfig import pg_config
 
 class UserDAO:
     def __init__(self):
-       
+
         connection_url = "dbname=%s user=%s password=%s host=%s port=%s" % (pg_config['dbname'], pg_config['user'], pg_config['password'], pg_config['host'], pg_config['port'])
         self.conn = psycopg2.connect(connection_url)
 
@@ -28,7 +28,7 @@ class UserDAO:
 
     def getAllUsers(self):
         cursor = self.conn.cursor()
-        query = "select * from users;"
+        query = 'select uid, firstname, lastname, phone, email, is_active, username from "user";'
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -40,6 +40,26 @@ class UserDAO:
         cursor = self.conn.cursor()
         query = "select cid, chatname, owner from participateschat natural inner join chat where uid = %s;"
         cursor.execute(query, (uid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        self.conn.close()
+        return result
+
+    def getInformationOfUserById(self, uid):
+        cursor = self.conn.cursor()
+        query = 'select uid, firstname, lastname, phone, email, is_active, username from "user" where uid = %s;'
+        cursor.execute(query, (uid, ))
+        result = []
+        for row in cursor:
+            result.append(row)
+        self.conn.close()
+        return result
+
+    def getInformationOfUserByUsername(self, username):
+        cursor = self.conn.cursor()
+        query = 'select uid, firstname, lastname, phone, email, is_active, username from "user" where username = %s;'
+        cursor.execute(query, (username, ))
         result = []
         for row in cursor:
             result.append(row)

@@ -5,7 +5,7 @@ from dao.UserDAO import UserDAO
 class UserHandler:
 
     def mapToDict(self, row):
-        result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4]}
+        result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4],'active': row[5], 'username': row[6]}
         return result
 
     def getAllUsers(self):
@@ -17,6 +17,26 @@ class UserHandler:
         for r in result:
             mapped_result.append(self.mapToDict(r))
         return jsonify(Users=mapped_result)
+
+    def getInformationOfUserById(self, id):
+        dao = UserDAO()
+        result = dao.getInformationOfUserById(id)
+        if result is None:
+            return jsonify(Error="NOT FOUND"), 404
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapToDict(r))
+        return jsonify(UserInfo=mapped_result)
+
+    def getInformationOfUserByUsername(self, uname):
+        dao = UserDAO()
+        result = dao.getInformationOfUserByUsername(uname)
+        if result is None:
+            return jsonify(Error="NOT FOUND"), 404
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapToDict(r))
+        return jsonify(UserInfo=mapped_result)
 
     def getAllChatsByUserId(self, id):
         dao = UserDAO()

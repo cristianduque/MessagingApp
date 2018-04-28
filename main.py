@@ -46,6 +46,14 @@ def users():
     handler = UserHandler()
     return handler.getAllUsers()
 
+@app.route('/SocialMessagingApp/user/<int:uid>')
+def getInformationOfUserById(uid):
+    return UserHandler().getInformationOfUserById(uid)
+
+@app.route('/SocialMessagingApp/user/<string:username>')
+def getInformationOfUserByUsername(username):
+    return UserHandler().getInformationOfUserByUsername(username)
+
 @app.route('/SocialMessagingApp/chat')
 def chats():
     handler = ChatHandler()
