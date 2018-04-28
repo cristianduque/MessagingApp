@@ -50,7 +50,7 @@ class UserDAO:
 
     def getAllChatsByUserId(self, uid):
         cursor = self.conn.cursor()
-        query = "select cid, chatname, owner from participates natural inner join chat where uid = %s;"
+        query = "select cid, chatname, owner from participateschat natural inner join chat where uid = %s;"
         cursor.execute(query, (uid,))
         result = []
         for row in cursor:
