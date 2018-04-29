@@ -1,0 +1,109 @@
+<application>
+  <component name="VimSettings">
+    <state version="4" enabled="false" />
+    <globalmarks>
+      <mark key="I" line="0" column="0" filename="$USER_HOME$/PycharmProjects/Pies/jijijijijijijijijij.py" protocol="file" />
+    </globalmarks>
+    <filemarks>
+      <file name="$USER_HOME$/PycharmProjects/Trying/hey.py" timestamp="1521931381209">
+        <mark key="[" line="0" column="0" />
+      </file>
+      <file name="/Dummy.txt" timestamp="1522026342659">
+        <mark key="e" line="0" column="0" />
+        <mark key="[" line="0" column="0" />
+        <mark key="]" line="0" column="0" />
+        <mark key="." line="0" column="0" />
+      </file>
+      <file name="$USER_HOME$/PycharmProjects/Trying/BBBBBBBBBBBBBBB.py" timestamp="1521940770498">
+        <mark key="e" line="0" column="0" />
+        <mark key="[" line="0" column="0" />
+        <mark key="l" line="0" column="0" />
+      </file>
+      <file name="/Python Console" timestamp="1521946727654">
+        <mark key="[" line="0" column="0" />
+      </file>
+      <file name="/fragment.py" timestamp="1521946152523">
+        <mark key="[" line="0" column="0" />
+      </file>
+      <file name="/a.dummy" timestamp="1522019077514">
+        <mark key="[" line="0" column="0" />
+      </file>
+      <file name="$USER_HOME$/PycharmProjects/Pies/Trying.py" timestamp="1521941001371">
+        <mark key="[" line="0" column="0" />
+      </file>
+      <file name="$USER_HOME$/PycharmProjects/MessageApp/users.py" timestamp="1521945415044">
+        <mark key="[" line="1" column="5" />
+        <mark key="]" line="1" column="5" />
+        <mark key="." line="1" column="5" />
+      </file>
+      <file name="$USER_HOME$/PycharmProjects/Pies/jijijijijijijijijij.py" timestamp="1521940979522">
+        <mark key="[" line="0" column="0" />
+      </file>
+      <file name="$USER_HOME$/PycharmProjects/MessageApp/main.py" timestamp="1521948368644">
+        <mark key="[" line="5" column="0" />
+      </file>
+      <file name="$USER_HOME$/PycharmProjects/Messages/Class.py" timestamp="1521927181733">
+        <mark key="[" line="0" column="0" />
+        <mark key="]" line="0" column="0" />
+        <mark key="." line="0" column="0" />
+      </file>
+      <file name="$USER_HOME$/PycharmProjects/MessagingApp/main.py" timestamp="1522016988785">
+        <mark key="[" line="9" column="12" />
+        <mark key="]" line="9" column="12" />
+        <mark key="." line="9" column="12" />
+      </file>
+      <file name="$USER_HOME$/PycharmProjects/MessagingApp/dao/MessageDAO.py" timestamp="1522026458121">
+        <mark key="'" line="6" column="22" />
+        <mark key="[" line="21" column="0" />
+        <mark key="]" line="21" column="0" />
+        <mark key="." line="21" column="0" />
+        <mark key="^" line="10" column="11" />
+      </file>
+    </filemarks>
+    <jumps />
+    <registers>
+      <register name="1" type="2">
+        <text encoding="base64">ICAgICAgICBzZWxmLm1lc3NhZ2VzLmFwcGVuZChNMSkKc2VsZi5tZXNzYWdlcy5hcHBlbmQoTTEpCg==</text>
+      </register>
+      <register name="&quot;" type="2">
+        <text encoding="base64">ICAgICAgICBzZWxmLm1lc3NhZ2VzLmFwcGVuZChNMSkKc2VsZi5tZXNzYWdlcy5hcHBlbmQoTTEpCg==</text>
+      </register>
+      <register name="2" type="4">
+        <text encoding="base64">CmltcG9ydCB0aW1l</text>
+      </register>
+      <register name="-" type="4">
+        <text />
+      </register>
+    </registers>
+    <search>
+      <last-dir>0</last-dir>
+      <show-last>false</show-last>
+    </search>
+    <history>
+      <history-search />
+      <history-cmd />
+      <history-expr />
+      <history-input />
+    </history>
+    <shortcut-conflicts>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed A</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed V</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed I</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed C</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed X</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed F</text>
+      </shortcut-conflict>
+    </shortcut-conflicts>
+  </component>
+</application>
