@@ -36,7 +36,7 @@ class UserDAO:
 
     def getAllUsers(self):
         cursor = self.conn.cursor()
-        query = "select * from users;"
+        query = 'select * from "user";'
         cursor.execute(query)
         result = []
         for row in cursor:

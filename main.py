@@ -7,7 +7,7 @@ from handler.MessageHandler import MessageHandler
 from handler.DashboardHandler import DashboardHandler
 
 app = Flask(__name__)
-app.config["JSON_SORT_KEYS"] = False
+app.config["JSON_SORT_KEYS"] = True
 
 @app.route('/')
 def home():
@@ -68,10 +68,20 @@ def allmessages():
     handler = MessageHandler()
     return handler.getAllMessages()
 
+@app.route('/SocialMessagingApp/message/<int:mid>')
+def messagebyid(mid):
+    handler = MessageHandler()
+    return handler.getMessageById(mid)
+
 @app.route('/SocialMessagingApp/hashtag')
 def hashtags():
     handler = HashtagHandler()
     return handler.getAllhashtags()
+
+@app.route('/SocialMessagingApp/message/hashtag/<int:mid>')
+def messagehashtags(mid):
+    handler = HashtagHandler()
+    return handler.gethashsInMessage(mid)
 
 @app.route('/SocialMessagingApp/hashtag/<string:hname>')
 def givenHash(hname):
@@ -98,6 +108,16 @@ def getdislikesinmessage(mid):
     handler = MessageHandler()
     return handler.getmessagedislikes(mid)
 
+@app.route('/SocialMessagingApp/message/like/num/<int:mid>')
+def getlikesinmessagenum(mid):
+    handler = MessageHandler()
+    return handler.getmessagelikesCount(mid)
+
+@app.route('/SocialMessagingApp/message/dislike/num/<int:mid>')
+def getdislikesinmessagenum(mid):
+    handler = MessageHandler()
+    return handler.getmessagedislikesCount(mid)
+
 @app.route('/SocialMessagingApp/user/contactlist/<int:uid>')
 def contactsOfUsers(uid):
     handler = ContactListHandler()
@@ -107,11 +127,5 @@ def contactsOfUsers(uid):
 def allContactList():
     handler = ContactListHandler()
     return handler.getAllContactLists()
-
-
-
-
 if __name__ == '__main__':
     app.run()
-
-
