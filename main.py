@@ -5,9 +5,13 @@ from handler.ContactListHandler import ContactListHandler
 from handler.HashtagHandler import HashtagHandler
 from handler.MessageHandler import MessageHandler
 from handler.DashboardHandler import DashboardHandler
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-app.config["JSON_SORT_KEYS"] = True
+
+CORS(app)
+app.config["JSON_SORT_KEYS"] = False
+
 
 @app.route('/')
 def home():
@@ -42,6 +46,14 @@ def getMessagesByUserId(uid):
 def users():
     handler = UserHandler()
     return handler.getAllUsers()
+
+@app.route('/SocialMessagingApp/user/<int:uid>')
+def getInformationOfUserById(uid):
+    return UserHandler().getInformationOfUserById(uid)
+
+@app.route('/SocialMessagingApp/user/<string:username>')
+def getInformationOfUserByUsername(username):
+    return UserHandler().getInformationOfUserByUsername(username)
 
 @app.route('/SocialMessagingApp/chat')
 def chats():
@@ -127,5 +139,6 @@ def contactsOfUsers(uid):
 def allContactList():
     handler = ContactListHandler()
     return handler.getAllContactLists()
+
 if __name__ == '__main__':
     app.run()
