@@ -1,9 +1,13 @@
 from dao.HashtagDAO import HashtagDao
 from flask import jsonify
-class HashtagHandler:
 
+class HashtagHandler:
     def maptoDicHash(self, hash):
         mapped = {'HashtagId': hash[0], 'Hashtag': hash[1]}
+        return mapped
+
+    def maptoDicHashname(self, hash):
+        mapped = {'Hashtag': hash[0]}
         return mapped
 
     def maptoDicMessage(self, m):
@@ -36,3 +40,12 @@ class HashtagHandler:
         for m in hash:
             result.append(self.maptoDicMessage(m))
         return jsonify(MessagesWithHash=result)
+
+    def gethashsInMessage(self, mid):
+        hash = HashtagDao().hashtagsInMessage(mid)
+        if hash == None:
+            return jsonify(Error="NOT FOUND"), 404
+        result = []
+        for m in hash:
+            result.append(self.maptoDicHashname(m))
+        return jsonify(HashInMessage=result)
