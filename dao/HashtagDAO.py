@@ -35,18 +35,18 @@ class HashtagDao:
 
     def messageWSpecificHash(self, hname):
         cursor = self.conn.cursor()
-        query = ("select * from message natural inner join containhash natural inner join hashtag where hname=%s;", (hname))
+        query = "select * from message natural inner join containhash natural inner join hashtag where hname=%s;"
         result = []
-        cursor.execute(query)
+        cursor.execute(query, (hname, ))
         for m in cursor:
             result.append(m)
         return result
 
     def hashtagsInMessage(self, mid):
         cursor = self.conn.cursor()
-        query = ("select hname from message natural inner join containhash natural inner join hashtag where mid=%s;", (mid))
+        query = "select hashname from message natural inner join containhash natural inner join hashtag where mid=%s;"
         result = []
-        cursor.execute(query)
+        cursor.execute(query, (mid, ))
         for m in cursor:
             result.append(m)
         return result

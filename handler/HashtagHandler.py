@@ -6,6 +6,10 @@ class HashtagHandler:
         mapped = {'HashtagId': hash[0], 'Hashtag': hash[1]}
         return mapped
 
+    def maptoDicHashname(self, hash):
+        mapped = {'Hashtag': hash[0]}
+        return mapped
+
     def maptoDicMessage(self, m):
         mapped = {'MessageId': m[0], 'Message': m[1], 'Chat': m[2], 'Date': m[3], 'Time': m[4], 'SenderId': m[5]}
         return mapped
@@ -43,5 +47,5 @@ class HashtagHandler:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in hash:
-            result.append(self.maptoDicHash(m))
+            result.append(self.maptoDicHashname(m))
         return jsonify(HashInMessage=result)

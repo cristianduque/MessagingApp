@@ -87,7 +87,7 @@ class MessageDAO:
 
     def getLikes(self):
         cursor = self.conn.cursor()
-        query = "select * from message natural inner join like natural inner join 'user';"
+        query = 'select * from message natural inner join "like" natural inner join "user";'
         result = []
         cursor.execute(query)
         for m in cursor:
@@ -96,7 +96,7 @@ class MessageDAO:
 
     def messageLikes(self, mid):
         cursor = self.conn.cursor()
-        query = "select * from message natural inner join like natural inner join 'user' where mid=%s;"
+        query = 'select * from message natural inner join "like" natural inner join "user" where mid=%s;'
         result = []
         cursor.execute(query, (mid, ))
         for m in cursor:
@@ -114,7 +114,7 @@ class MessageDAO:
 
     def messagesDislikes(self, mid):
         cursor = self.conn.cursor()
-        query = "select * from message natural inner join dislike natural inner join 'user' where mid=%s;"
+        query = 'select * from message natural inner join dislike natural inner join "user" where mid=%s;'
         result = []
         cursor.execute(query, (mid, ))
         for m in cursor:
@@ -123,7 +123,7 @@ class MessageDAO:
 
     def countLikes(self):
         cursor = self.conn.cursor()
-        query = "select count(*) from message natural inner join like natural inner join 'user';"
+        query = 'select count(*) from message natural inner join like natural inner join "user";'
         result = []
         cursor.execute(query)
         for m in cursor:
@@ -132,7 +132,7 @@ class MessageDAO:
 
     def countDislikes(self):
         cursor = self.conn.cursor()
-        query = "select count(*) from message natural inner join dislike natural inner join 'user';"
+        query = 'select count(*) from message natural inner join dislike natural inner join "user";'
         result = []
         cursor.execute(query)
         for m in cursor:
@@ -150,7 +150,7 @@ class MessageDAO:
 
     def countLikesMessage(self, mid):
         cursor = self.conn.cursor()
-        query = "select count(*) from message natural inner join like natural inner join 'user' where mid=%s;"
+        query = 'select count(*) from message natural inner join "like" natural inner join "user" where mid=%s;'
         result = []
         cursor.execute(query, (mid, ))
         for m in cursor:
