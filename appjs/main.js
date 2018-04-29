@@ -11,7 +11,9 @@
             templateUrl: 'pages/chat.html',
             controller: 'ChatController',
             controllerAs : 'chatCtrl'
-        }).otherwise({
+        })
+        //hay que a-dair aqui los when de cada mensaje y a donde va redirect
+        .otherwise({
             redirectTo: '/chat'
         });
     }]);
