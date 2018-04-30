@@ -8,6 +8,12 @@ class MessageHandler:
         mapped = {'MessageId': m[0], 'Message': m[4][0], 'Chat': m[1], 'Date': m[3], 'SenderId': m[2]}
         return mapped
 
+    def mapChatMessage(self, m):
+        return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3][0]}
+
+    def mapUserMessage(self, m):
+        return {'Chatname': m[0], 'ChatID': m[1], 'MessageID': m[2], 'Time': m[3], 'Text': m[4][0]}
+
     def getMessageById(self, mid):
         messages = MessageDAO().messageById(mid)
         if messages == None:
@@ -32,7 +38,7 @@ class MessageHandler:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
-            result.append(self.maptoDicMessage(m))
+            result.append(self.mapChatMessage(m))
         return jsonify(MessagesFromChat=result)
 
     def getMessagesFromUser(self, uid):
@@ -41,7 +47,7 @@ class MessageHandler:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
-            result.append(self.maptoDicMessage(m))
+            result.append(self.mapUserMessage(m))
         return jsonify(MessagesFromUser=result)
 
     def getalllikes(self):
@@ -68,8 +74,14 @@ class MessageHandler:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
-            result.append(self.maptoDicMessage(m))
+            result.append(self.mapreply(m))
         return jsonify(MessageReplies=result)
+
+    def getMessageRepliesCount(self, mid):
+        messages = MessageDAO().countRepliesMessage(mid)
+        if messages == None:
+            return jsonify(Error="NOT FOUND"), 404
+        return jsonify(MessageReplies=messages)
 
     def getmessagedislikes(self, mid):
         dao = MessageDAO().messagesDislikes(mid)
@@ -78,7 +90,7 @@ class MessageHandler:
         result = []
         for l in dao:
             result.append(self.mapdislikes(l))
-        return jsonify(LikeInMessage=result)
+        return jsonify(DislikeInMessage=result)
 
     def getmessagelikes(self, mid):
         dao = MessageDAO().messageLikes(mid)
@@ -87,40 +99,26 @@ class MessageHandler:
         result = []
         for l in dao:
             result.append(self.maplikes(l))
-        return jsonify(DislikesInMessage=result)
-
-    def getMessageRepliesCount(self, mid):
-        messages = MessageDAO().countRepliesMessage(mid)
-        if messages == None:
-            return jsonify(Error="NOT FOUND"), 404
-        result = self.mapCount(messages[0])
-        return jsonify(MessageReplies=result)
+        return jsonify(LikesInMessage=result)
 
     def getmessagedislikesCount(self, mid):
         dao = MessageDAO().countDislikesMessage(mid)
         if dao == None:
             return jsonify(Error="NOT FOUND"), 404
-        result = self.mapCount(dao[0])
-        return jsonify(LikeInMessage=result)
+        return jsonify(DislikeInMessage=dao)
 
     def getmessagelikesCount(self, mid):
         dao = MessageDAO().countLikesMessage(mid)
         if dao == None:
             return jsonify(Error="NOT FOUND"), 404
-        result = self.mapCount(dao[0])
-        return jsonify(DislikesInMessage=result)
+        return jsonify(LikesInMessage=dao)
 
     def mapdislikes(self, d):
-        return {'dislikeid': d[0], 'messagesDisliked': d[1], 'userThatDisliked': d[2]}
+        return {'userThatDisliked': d[0]}
 
     def maplikes(self, d):
-        return {'likeid': d[0], 'messagesLiked': d[1], 'userThatLiked': d[2]}
+        return {'userThatLiked': d[0]}
 
-    def mapNumdislike(self, d):
-        return{'Number of Dislikes': d}
+    def mapreply(self, d):
+        return {'Username': d[1], 'Reply': d[0][0] }
 
-    def mapNumlike(self, d):
-        return{'Number of Likes': d}
-
-    def mapCount(self, d):
-        return{'Count': d[0]}
