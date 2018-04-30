@@ -52,7 +52,7 @@ class UserHandler:
         dao = UserDAO()
         result = dao.getNumberMessagesByUserId(id)
         return jsonify(NumberMessages=result)
-       
+
     def getMessagesByUserId(self,id):
         dao = UserDAO()
         result = dao.getMessagesByUserId(id)
