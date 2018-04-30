@@ -40,7 +40,7 @@ def getNumberMessagesByUserId(uid):
 
 @app.route('/SocialMessagingApp/user/message/<int:uid>')
 def getMessagesByUserId(uid):
-    return UserHandler().getMessagesByUserId(uid)
+    return MessageHandler().getMessagesFromUser(uid)
 
 @app.route('/SocialMessagingApp/user')
 def users():

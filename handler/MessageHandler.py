@@ -8,6 +8,12 @@ class MessageHandler:
         mapped = {'MessageId': m[0], 'Message': m[4][0], 'Chat': m[1], 'Date': m[3], 'SenderId': m[2]}
         return mapped
 
+    def mapChatMessage(self, m):
+        return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3][0]}
+
+    def mapUserMessage(self, m):
+        return {'Chatname': m[0], 'ChatID': m[1], 'MessageID': m[2], 'Time': m[3], 'Text': m[4][0]}
+
     def getMessageById(self, mid):
         messages = MessageDAO().messageById(mid)
         if messages == None:
@@ -32,7 +38,7 @@ class MessageHandler:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
-            result.append(self.maptoDicMessage(m))
+            result.append(self.mapChatMessage(m))
         return jsonify(MessagesFromChat=result)
 
     def getMessagesFromUser(self, uid):
@@ -41,7 +47,7 @@ class MessageHandler:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
-            result.append(self.maptoDicMessage(m))
+            result.append(self.mapUserMessage(m))
         return jsonify(MessagesFromUser=result)
 
     def getalllikes(self):

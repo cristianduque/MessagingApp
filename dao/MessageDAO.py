@@ -23,7 +23,7 @@ class MessageDAO:
 
     def messagesFromChat(self, cid):
         cursor = self.conn.cursor()
-        query = "select * from chat natural inner join message where cid=%s;"
+        query = 'select username, mid, time, text  from chat natural inner join message natural inner join "user" where cid=%s;'
         result = []
         cursor.execute(query, (cid, ))
         for m in cursor:
@@ -32,7 +32,7 @@ class MessageDAO:
 
     def messagesFromUser(self, uid):
         cursor = self.conn.cursor()
-        query = "select * from 'user' natural inner join message where uid=%s;"
+        query = 'select chatname, cid, mid, time, text  from chat natural inner join message natural inner join "user" where uid=%s;'
         result = []
         cursor.execute(query, (uid, ) )
         for m in cursor:
