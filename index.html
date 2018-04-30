@@ -24,18 +24,23 @@
         color: red;
         background-color: black;
         family-font: Courier new;
-        background-image: url("https://ak1.picdn.net/shutterstock/videos/1008189331/thumb/12.jpg?i10c=img.resize(height:160)")
-        background-repeat:no-repeat;
-        background-size: cover;
+    }
+    h2{
+        margin: 10%;
+        background-image: url('https://ak1.picdn.net/shutterstock/videos/1008189331/thumb/12.jpg?i10c=img.resize(height:160)');
+        background-size: 100% 100%;
+        font-family: Lucida Console;
+        font-weight: bold;
+
     }
 </style>
+
 <body>
-    <img
-        src="https://ak1.picdn.net/shutterstock/videos/1008189331/thumb/12.jpg?i10c=img.resize(height:160)">
-    <center><h2>The only chat right now</h2></center>
+    <center><h2>THE ONLY CHAT RIGHT NOW</h2></center>
     <ng-view>
     </ng-view>
     <script type="text/javascript" src="appjs/main.js"></script>
     <script type="text/javascript" src="appjs/chat.js"></script>
+    <!--script type="text/javascript" src="appjs/message.js"></script-->
 </body>
 </html>
