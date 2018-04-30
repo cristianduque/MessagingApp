@@ -41,12 +41,18 @@ class MessageDAO:
 
     def messageReply(self, mid):
         cursor = self.conn.cursor()
-        query = "select * from message inner join reply inner join message on message.mid=reply.mid, message.mid=reply.reply where mid=%s;"
+        query = 'select m2.text, u.username  from message as m1, reply as r, message as m2, "user" as u where u.uid=m2.uid and m1.mid=r.mid and m2.mid=r.reply and m1.mid=%s;'
         result = []
         cursor.execute(query, (mid, ))
         for m in cursor:
             result.append(m)
         return result
+
+    def countRepliesMessage(self, mid):
+        cursor = self.conn.cursor()
+        query = 'select count(*) from message as m1, reply as r, message as m2, "user" as u where u.uid=m2.uid and m1.mid=r.mid and m2.mid=r.reply and m1.mid=%s;'
+        cursor.execute(query, (mid, ))
+        return cursor.fetchone()[0]
 
     def getLikes(self):
         cursor = self.conn.cursor()
@@ -97,8 +103,3 @@ class MessageDAO:
         cursor.execute(query, (mid, ))
         return cursor.fetchone()[0]
 
-    def countRepliesMessage(self, mid):
-        cursor = self.conn.cursor()
-        query = "select count(*) from message, reply, message where message.mid=reply.mid and message.mid=reply.reply and mid=%s;"
-        cursor.execute(query, (mid, ))
-        return cursor.fetchone()[0]
