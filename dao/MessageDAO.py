@@ -38,10 +38,7 @@ class MessageDAO:
         cursor = self.conn.cursor()
         query = "select * from message;"
         cursor.execute(query)
-        result = []
-        for m in cursor:
-            result.append(m)
-        return result
+        return cursor
 
     def messageById(self, mid):
         cursor = self.conn.cursor()
