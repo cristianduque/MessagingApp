@@ -11,7 +11,7 @@ class UserHandler:
     def getAllUsers(self):
         dao = UserDAO()
         result = dao.getAllUsers()
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         mapped_result = []
         for r in result:
@@ -21,7 +21,7 @@ class UserHandler:
     def getAllChatsByUserId(self, id):
         dao = UserDAO()
         result = dao.getAllChatsByUserId(id)
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         mapped_result = []
         for r in result:
@@ -31,16 +31,16 @@ class UserHandler:
     def getNumberMessagesByUserId(self,id):
         dao = UserDAO()
         result = dao.getNumberMessagesByUserId(id)
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
-            return jsonify(Messages=result)
+            return jsonify(NumberMessages=result)
 
     def getMessagesByUserId(self,id):
         dao = UserDAO()
         result = dao.getMessagesByUserId(id)
         r = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for m in result:
