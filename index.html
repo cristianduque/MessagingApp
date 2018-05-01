@@ -22,25 +22,40 @@
 <style>
     body{
         color: red;
-        background-color: black;
-        family-font: Courier new;
+        background-color: #ccf2ff;
+        font-family: Courier new;
     }
-    h2{
-        margin: 10%;
-        background-image: url('https://ak1.picdn.net/shutterstock/videos/1008189331/thumb/12.jpg?i10c=img.resize(height:160)');
-        background-size: 100% 100%;
-        font-family: Lucida Console;
-        font-weight: bold;
+    #imgg{
+        size: 15px;
+        float: left;
+        margin: 10px;
+        margin-bottom: cover;
+        z-index:-1
 
+    }
+    #heat2{
+        position: center;
+        family-font:
+        float: center;
+        z-index:0;
     }
 </style>
 
 <body>
-    <center><h2>THE ONLY CHAT RIGHT NOW</h2></center>
+    <div id="imgg">
+        <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/3766-200.png">
+    </div>
+    <div id="heat2">
+        <h2>THE ONLY CHAT RIGHT NOW</h2>
+    </div>
+    <div id="body">
+    <body>
     <ng-view>
     </ng-view>
     <script type="text/javascript" src="appjs/main.js"></script>
     <script type="text/javascript" src="appjs/chat.js"></script>
     <!--script type="text/javascript" src="appjs/message.js"></script-->
-</body>
+    </body>
+    </div>
+
 </html>
