@@ -1,8 +1,7 @@
 angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope',
     function($http, $log, $scope) {
         var thisCtrl = this;
-
-
+        
         this.msgHW = [];
         //   0MID, 1TEXT, 2AUTHOR, 3LIKE, 4DISLIKE
         var m1 = [1, "Holita", "Gladymar", 7, 10];
