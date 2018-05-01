@@ -2,11 +2,12 @@ from flask import jsonify
 from dao.ChatDAO import ChatDAO
 
 class ChatHandler:
+
     def getAllChats(self):
         dao = ChatDAO()
         result = dao.getAllChats()
         if not result:
-            return jsonify(Error="NOT FOUND"), 404
+            return jsonify(Error="No chats"), 404
         mapped_result = []
         for r in result:
             mapped_result.append(self.mapToDict(r))
@@ -16,21 +17,23 @@ class ChatHandler:
         dao = ChatDAO()
         result = dao.getChat(cid)
         if not result:
-            return jsonify(Error= "NOT FOUND"), 404
+            return jsonify(Error= "Chat does not exist."), 404
         else:
-            mapped_result = self.mapChatToDict(result)
-            return jsonify(ChatInfo=mapped_result)
-
-
+            mapped_result = []
+            for r in result:
+              mapped_result.append(self.mapToDict(r))
+            return jsonify(Chats=mapped_result)
 
     def getOwner(self, cid):
         dao = ChatDAO()
         result = dao.getOwnerOfChat(cid)
-        if result == None:
-            return jsonify(Error="NOT FOUND"), 404
+        if not result:
+            return jsonify(Error="No chat with that ID"), 404
         else:
-            mapped_result = self.mapOwnerToDict(result)
-            return jsonify(Owners=mapped_result)
+            mapped_result = []
+            for r in result:
+                mapped_result.append(self.mapOwnerToDict(r))
+            return jsonify(Owner=mapped_result)
 
     def getAllUsersInChat(self, cid):
         dao = ChatDAO()
