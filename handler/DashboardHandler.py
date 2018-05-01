@@ -16,12 +16,12 @@ class DashboardHandler:
         trendHash = []
         for h in d[4]:
             trendHash.append(self.maptoDicHash(h))
-        return {'Number Of Dislikes': d[0], 'Number Of Likes': d[1], 'Number Of Messages': d[2], 'Numbers Of Replies': d[3], 'Trending Hashtags': trendHash, 'Active Users': activeUsers}
+        return {'Number Of Dislikes': d[0][0], 'Number Of Likes': d[1][0], 'Number Of Messages': d[2][0], 'Numbers Of Replies': d[3][0], 'Trending Hashtags': trendHash, 'Active Users': activeUsers}
 
     def mapToDict(self, row):
-        result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4]}
+        result = {'username': row[0]}
         return result
 
     def maptoDicHash(self, h):
-        mapped = {'HashtagId': h[0], 'Hashtag': h[1]}
+        mapped = {'Hashtag': h[0]}
         return mapped
