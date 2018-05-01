@@ -46,12 +46,6 @@ class DashboardDAO:
         query = 'select count(*) from dislike;'
         cursor.execute(query)
         return cursor.fetchone()
-
-    def numdislike(self):
-        cursor = self.conn.cursor()
-        query = 'select count(*) from dislike;'
-        cursor.execute(query)
-        return cursor.fetchone()
     
     def numlike(self):
         cursor = self.conn.cursor()

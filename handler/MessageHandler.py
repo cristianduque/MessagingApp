@@ -16,7 +16,7 @@ class MessageHandler:
 
     def getMessageById(self, mid):
         messages = MessageDAO().messageById(mid)
-        if messages == None:
+        if not messages:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
@@ -25,7 +25,7 @@ class MessageHandler:
 
     def getAllMessages(self):
         messages = MessageDAO().allMessages()
-        if messages == None:
+        if not messages:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
@@ -34,7 +34,7 @@ class MessageHandler:
 
     def getMessagesFromChat(self, cid):
         messages = MessageDAO().messagesFromChat(cid)
-        if messages == None:
+        if not messages:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
@@ -43,7 +43,7 @@ class MessageHandler:
 
     def getMessagesFromUser(self, uid):
         messages = MessageDAO().messagesFromUser(uid)
-        if messages == None:
+        if not messages:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
@@ -52,7 +52,7 @@ class MessageHandler:
 
     def getalllikes(self):
         dao = MessageDAO().getLikes()
-        if dao == None:
+        if not dao:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for l in dao:
@@ -61,7 +61,7 @@ class MessageHandler:
 
     def getalldislikes(self):
         dao = MessageDAO().getDislikes()
-        if dao == None:
+        if not dao:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for l in dao:
@@ -70,7 +70,7 @@ class MessageHandler:
 
     def getMessageReplies(self, mid):
         messages = MessageDAO().messageReply(mid)
-        if messages == None:
+        if not messages:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in messages:
@@ -79,13 +79,13 @@ class MessageHandler:
 
     def getMessageRepliesCount(self, mid):
         messages = MessageDAO().countRepliesMessage(mid)
-        if messages == None:
+        if messages==None:
             return jsonify(Error="NOT FOUND"), 404
         return jsonify(MessageReplies=messages)
 
     def getmessagedislikes(self, mid):
         dao = MessageDAO().messagesDislikes(mid)
-        if dao == None:
+        if not dao:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for l in dao:
@@ -94,7 +94,7 @@ class MessageHandler:
 
     def getmessagelikes(self, mid):
         dao = MessageDAO().messageLikes(mid)
-        if dao == None:
+        if not dao:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for l in dao:
