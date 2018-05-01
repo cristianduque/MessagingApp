@@ -40,5 +40,9 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             this.loadMessages();
         };
 
+        this.loadLikesAndDislikes = function(){
+            window.location = "http://localhost:63343/SocialMessagingApp/pages/interactions.html";
+        };
+
         this.loadMessages();
     }]);
