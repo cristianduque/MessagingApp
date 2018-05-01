@@ -140,5 +140,10 @@ def allContactList():
     handler = ContactListHandler()
     return handler.getAllContactLists()
 
+@app.route('/SocialMessagingApp/chat/<int:cid>')
+def getChat(cid):
+    handler = ChatHandler()
+    return handler.getChat(cid)
+
 if __name__ == '__main__':
     app.run()
