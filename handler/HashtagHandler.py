@@ -10,10 +10,6 @@ class HashtagHandler:
         mapped = {'Hashtag': hash[0] }
         return mapped
 
-    # def maptoDicMessage(self, m):
-    #     mapped = {'MessageId': m[0], 'Message': m[1][0], 'Chat': m[2], 'Date': m[3], 'Time': m[4], 'SenderId': m[5]}
-    #     return mapped
-
     def maptoMess(self, m):
         mapped = {'MessageId': m[0], 'Message': m[1][0]}
         return mapped
@@ -26,15 +22,6 @@ class HashtagHandler:
         for h in hash:
             result.append(self.maptoDicHash(h))
         return jsonify(Allhashtags=result)
-
-    # def getmessageswithhash(self):
-    #     hash = HashtagDao().messageswithHashtag()
-    #     if hash == None:
-    #         return jsonify(Error="NOT FOUND"), 404
-    #     result = []
-    #     for m in hash:
-    #         result.append(self.maptoDicMessage(m))
-    #     return jsonify(AllMessagesWithHash=result)
 
     def getmessagewithhas(self, hashtext):
         hash = HashtagDao().messageWSpecificHash(hashtext)

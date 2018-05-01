@@ -8,7 +8,7 @@ class MessageDAO:
 
     def allMessages(self):
         cursor = self.conn.cursor()
-        query = "select * from message;"
+        query = 'select  mid, text, chatname, time, username  from chat natural inner join message natural inner join "user";'
         cursor.execute(query)
         return cursor
 
@@ -78,7 +78,6 @@ class MessageDAO:
         result = []
         cursor.execute(query)
         for m in cursor:
-            print(m)
             result.append(m)
         return result
 

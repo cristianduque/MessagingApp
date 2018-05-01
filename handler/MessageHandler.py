@@ -5,7 +5,7 @@ from dao.HashtagDAO import HashtagDao
 class MessageHandler:
 
     def maptoDicMessage(self, m):
-        mapped = {'MessageId': m[0], 'Message': m[4][0], 'Chat': m[1], 'Date': m[3], 'SenderId': m[2]}
+        mapped = {'MessageId': m[0], 'Message': m[1][0], 'Chat': m[2], 'Date': m[3], 'Username': m[4]}
         return mapped
 
     def mapChatMessage(self, m):
