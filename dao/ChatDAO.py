@@ -18,9 +18,21 @@ class ChatDAO:
         self.conn.close()
         return result
 
+
+    def getChat(self, cid):
+        cursor = self.conn.cursor()
+        query = 'select cid, chatname, username from chat as C inner join "user" as U on U.uid=C.owner where cid = %s;'
+        cursor.execute(query, (cid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        self.conn.close()
+        return result
+
+
     def getOwnerOfChat(self, cid):
         cursor = self.conn.cursor()
-        query = 'select firstname, lastname, username, phone, email from "user" as U inner join chat as C on U.uid = C.owner where cid = %s'
+        query = 'select uid, firstname, lastname, phone, email, username from "user" as U inner join chat as C on U.uid = C.owner where cid = %s;'
         cursor.execute(query, (cid,))
         result = []
         for row in cursor:
@@ -30,7 +42,7 @@ class ChatDAO:
 
     def getAllUsersInChat(self, cid):
         cursor = self.conn.cursor()
-        query ="select firstname, lastname, username, phone, email from participateschat as C inner join 'user' as U on C.uid = U.uid where C.cid = 1;"
+        query ='select uid, firstname, lastname, phone, email, username from participateschat as C inner join "user" as U on C.uid = U.uid where C.cid = 1;'
         cursor.execute(query, (cid,))
         result = []
         for row in cursor:

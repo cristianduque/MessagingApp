@@ -12,6 +12,17 @@ class ChatHandler:
             mapped_result.append(self.mapToDict(r))
         return jsonify(Chats=mapped_result)
 
+    def getChat(self, cid):
+        dao = ChatDAO()
+        result = dao.getChat(cid)
+        if result == None:
+            return jsonify(Error= "NOT FOUND"), 404
+        else:
+            mapped_result = self.mapChatToDict(result)
+            return jsonify(ChatInfo=mapped_result)
+
+
+
     def getOwner(self, cid):
         dao = ChatDAO()
         result = dao.getOwnerOfChat(cid)
@@ -36,9 +47,13 @@ class ChatHandler:
         result = {'cid': row[0], 'chatname': row[1]}
         return result
 
+    def mapChatToDict(self, row):
+        result = {'cid': row[0], 'chatname': row[1], 'owner': row[2]}
+        return result
+
     def mapOwnerToDict(self, row):
-        result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4]}
+        result = {'uid': row[0], 'name': row[1] +  row[2], 'phone': row[3], 'email': row[4], 'user_name': row[5]}
         return result
     def mapToUsersInChatDict(self, row):
-        result = {'uid': row[0], 'name': row[1] + row[2]}
+        result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4], 'user_name': row[5]}
         return result
