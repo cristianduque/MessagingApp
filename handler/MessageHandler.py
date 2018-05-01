@@ -56,7 +56,7 @@ class MessageHandler:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for l in dao:
-            result.append(self.maplikes(l))
+            result.append(self.maplikesall(l))
         return jsonify(AllLikes=result)
 
     def getalldislikes(self):
@@ -65,7 +65,7 @@ class MessageHandler:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for l in dao:
-            result.append(self.mapdislikes(l))
+            result.append(self.mapdislikesall(l))
         return jsonify(AllDislikes=result)
 
     def getMessageReplies(self, mid):
@@ -118,6 +118,13 @@ class MessageHandler:
 
     def maplikes(self, d):
         return {'userThatLiked': d[0]}
+
+    def maplikesall(self, d):
+        return {'userThatLiked': d[0]}
+
+    def mapdislikesall(self, d):
+        return {'userThatDisliked': d[0]}
+
 
     def mapreply(self, d):
         return {'Username': d[1], 'Reply': d[0][0] }

@@ -100,16 +100,6 @@ def givenHash(hname):
     handler = HashtagHandler()
     return handler.getmessagewithhas(hname)
 
-@app.route('/SocialMessagingApp/dislike')
-def getalldislikes():
-    handler = MessageHandler()
-    return handler.getalldislikes()
-
-@app.route('/SocialMessagingApp/like')
-def getalllikes():
-    handler = MessageHandler()
-    return handler.getalllikes()
-
 @app.route('/SocialMessagingApp/message/like/<int:mid>')
 def getlikesinmessage(mid):
     handler = MessageHandler()
