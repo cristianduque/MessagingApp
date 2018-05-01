@@ -21,7 +21,7 @@ class MessageHandler:
         result = []
         for m in messages:
             result.append(self.maptoDicMessage(m))
-            return jsonify(Message=result)
+        return jsonify(Message=result)
 
     def getAllMessages(self):
         messages = MessageDAO().allMessages()

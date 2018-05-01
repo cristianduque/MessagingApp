@@ -4,7 +4,7 @@ from flask import jsonify
 class ContactListHandler:
 
     def maptoDicContactList(self, cl):
-        mapped= {'uid': cl[0], 'contactid': cl[1]}
+        mapped= {'uid': cl[0], 'username': cl[1], 'Number of contacts': cl[2]}
         return mapped
 
     def mapToDict(self, row):
