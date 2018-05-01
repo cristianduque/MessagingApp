@@ -40,7 +40,7 @@ def getNumberMessagesByUserId(uid):
 
 @app.route('/SocialMessagingApp/user/message/<int:uid>')
 def getMessagesByUserId(uid):
-    return UserHandler().getMessagesByUserId(uid)
+    return MessageHandler().getMessagesFromUser(uid)
 
 @app.route('/SocialMessagingApp/user')
 def users():
@@ -115,6 +115,11 @@ def getlikesinmessage(mid):
     handler = MessageHandler()
     return handler.getmessagelikes(mid)
 
+@app.route('/SocialMessagingApp/message/reply/<int:mid>')
+def getreplyinmessage(mid):
+    handler = MessageHandler()
+    return handler.getMessageReplies(mid)
+
 @app.route('/SocialMessagingApp/message/dislike/<int:mid>')
 def getdislikesinmessage(mid):
     handler = MessageHandler()
@@ -125,6 +130,11 @@ def getlikesinmessagenum(mid):
     handler = MessageHandler()
     return handler.getmessagelikesCount(mid)
 
+@app.route('/SocialMessagingApp/message/reply/num/<int:mid>')
+def getreplyinmessagenum(mid):
+    handler = MessageHandler()
+    return handler.getMessageRepliesCount(mid)
+
 @app.route('/SocialMessagingApp/message/dislike/num/<int:mid>')
 def getdislikesinmessagenum(mid):
     handler = MessageHandler()
@@ -133,7 +143,7 @@ def getdislikesinmessagenum(mid):
 @app.route('/SocialMessagingApp/user/contactlist/<int:uid>')
 def contactsOfUsers(uid):
     handler = ContactListHandler()
-    return handler.getUsersInContactList(uid)
+    return handler.getAllContactsFromUser(uid)
 
 @app.route('/SocialMessagingApp/contactlist')
 def allContactList():
