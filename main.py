@@ -110,22 +110,22 @@ def getalllikes():
     handler = MessageHandler()
     return handler.getalllikes()
 
-@app.route('/SocialMessagingApp/message/like/<int:mid>') #result vacio para el 6, solo funciona para el 7
+@app.route('/SocialMessagingApp/message/like/<int:mid>') #OK
 def getlikesinmessage(mid):
     handler = MessageHandler()
     return handler.getmessagelikes(mid)
 
-@app.route('/SocialMessagingApp/message/reply/<int:mid>') #OK, pero result vacio si no existe
+@app.route('/SocialMessagingApp/message/reply/<int:mid>') #OK
 def getreplyinmessage(mid):
     handler = MessageHandler()
     return handler.getMessageReplies(mid)
 
-@app.route('/SocialMessagingApp/message/dislike/<int:mid>') #OK, pero result vacio si no hay nada
+@app.route('/SocialMessagingApp/message/dislike/<int:mid>') #OK
 def getdislikesinmessage(mid):
     handler = MessageHandler()
     return handler.getmessagedislikes(mid)
 
-@app.route('/SocialMessagingApp/message/like/num/<int:mid>') #solo sale para el 7, no para el 6 y vacio para el resto
+@app.route('/SocialMessagingApp/message/like/num/<int:mid>') #OK
 def getlikesinmessagenum(mid):
     handler = MessageHandler()
     return handler.getmessagelikesCount(mid)
@@ -140,12 +140,12 @@ def getdislikesinmessagenum(mid):
     handler = MessageHandler()
     return handler.getmessagedislikesCount(mid)
 
-@app.route('/SocialMessagingApp/user/contactlist/<int:uid>') #wrong outputs, 2 es el 3, 3 es el 4, pero sale bien el Error: not found
+@app.route('/SocialMessagingApp/user/contactlist/<int:uid>') #OK
 def contactsOfUsers(uid):
     handler = ContactListHandler()
     return handler.getAllContactsFromUser(uid)
 
-@app.route('/SocialMessagingApp/contactlist') #OK
+@app.route('/SocialMessagingApp/contactlist') #deberia no mostrar los usuarios que hay en cada contact list, sino el total y owner
 def allContactList():
     handler = ContactListHandler()
     return handler.getAllContactLists()
