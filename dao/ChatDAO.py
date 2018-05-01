@@ -37,7 +37,8 @@ class ChatDAO:
         query = "select firstname, lastname, username, phone, email from 'user' as U inner join chat as C on U.uid = C.owner where cid = %s"
         cursor.execute(query, (cid,))
         result = []
-        result.append(row)
+        for row in cursor:
+            result.append(row)
         self.conn.close()
         return result
 
