@@ -143,7 +143,7 @@ def getdislikesinmessagenum(mid):
 @app.route('/SocialMessagingApp/user/contactlist/<int:uid>')
 def contactsOfUsers(uid):
     handler = ContactListHandler()
-    return handler.getUsersInContactList(uid)
+    return handler.getAllContactsFromUser(uid)
 
 @app.route('/SocialMessagingApp/contactlist')
 def allContactList():

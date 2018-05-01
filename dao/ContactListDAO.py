@@ -1,38 +1,28 @@
 from  dao.UserDAO import UserDAO
+import psycopg2
+from config.dbconfig import pg_config
 
 class ContactListDAO:
     def __init__(self):
-
-        CL1 = [1, 123]
-        CL2 = [2, 456]
-        CL3 = [3, 78]
-        CL4 = [4, 910]
-
-        self.contactList = [CL1, CL2, CL3, CL4]
-        self.users = UserDAO().getAllUsers()
-
+        connection_url = "dbname=%s user=%s password=%s host=%s port=%s" % (pg_config['dbname'], pg_config['user'], pg_config['password'], pg_config['host'], pg_config['port'])
+        self.conn = psycopg2.connect(connection_url)
 
     def allContactLists(self):
-        return self.contactList
-
+        cursor = self.conn.cursor()
+        query = "select * from contactlist;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        self.conn.close()
+        return result
 
     def contactlistofUser(self, uid):
+        cursor = self.conn.cursor()
+        query = "select contact from contactlist where uid = %s;"
+        cursor.execute(query, (uid, ))
         result = []
-        if uid == 123:
-            return result
-        elif uid == 456:
-            result.append(self.users[0])
-            result.append(self.users[2])
-            result.append(self.users[3])
-            return result
-        elif uid == 78:
-            result.append(self.users[0])
-            return result
-        elif uid == 910:
-            result.append(self.users[0])
-            result.append(self.users[1])
-            result.append(self.users[2])
-            result.append(self.users[3])
-            return result
-        else:
-            return result
+        for row in cursor:
+            result.append(row)
+        self.conn.close()
+        return result
