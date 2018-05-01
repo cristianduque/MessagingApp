@@ -5,7 +5,7 @@ class ChatHandler:
     def getAllChats(self):
         dao = ChatDAO()
         result = dao.getAllChats()
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         mapped_result = []
         for r in result:
@@ -15,7 +15,7 @@ class ChatHandler:
     def getChat(self, cid):
         dao = ChatDAO()
         result = dao.getChat(cid)
-        if result == None:
+        if not result:
             return jsonify(Error= "NOT FOUND"), 404
         else:
             mapped_result = self.mapChatToDict(result)
@@ -35,8 +35,8 @@ class ChatHandler:
     def getAllUsersInChat(self, cid):
         dao = ChatDAO()
         result = dao.getAllUsersInChat(cid)
-        if result == None:
-            return jsonify(Error="NOT FOUND"), 404
+        if not result:
+            return jsonify(Error="No chat with that ID or no users in that chat"), 404
         else:
             mapped_result = []
             for r in result:
@@ -52,8 +52,9 @@ class ChatHandler:
         return result
 
     def mapOwnerToDict(self, row):
-        result = {'uid': row[0], 'name': row[1] +  row[2], 'phone': row[3], 'email': row[4], 'user_name': row[5]}
+        result = {'uid': row[0], 'firstname': row[1], 'lastname': row[2], 'phone': row[3], 'email': row[4], 'user_name': row[5]}
         return result
+
     def mapToUsersInChatDict(self, row):
         result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4], 'user_name': row[5]}
         return result

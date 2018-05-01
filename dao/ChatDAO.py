@@ -42,7 +42,7 @@ class ChatDAO:
 
     def getAllUsersInChat(self, cid):
         cursor = self.conn.cursor()
-        query ='select uid, firstname, lastname, phone, email, username from participateschat as C inner join "user" as U on C.uid = U.uid where C.cid = 1;'
+        query ='select U.uid, firstname, lastname, phone, email, username from participateschat as C inner join "user" as U on C.uid = U.uid where C.cid = %s;'
         cursor.execute(query, (cid,))
         result = []
         for row in cursor:
