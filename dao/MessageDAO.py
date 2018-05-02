@@ -8,13 +8,13 @@ class MessageDAO:
 
     def allMessages(self):
         cursor = self.conn.cursor()
-        query = 'select  mid, text, chatname, time, username from chat natural inner join message natural inner join "user";'
+        query = 'select  mid, text, chatname, time, username  from chat natural inner join message natural inner join "user";'
         cursor.execute(query)
         return cursor
 
     def messageById(self, mid):
         cursor = self.conn.cursor()
-        query =  'select mid, text, chatname, time, username  from chat natural inner join message natural inner join "user" where mid=%s'
+        query =  "select * from message where mid=%s"
         cursor.execute(query, (mid, ))
         result = []
         for m in cursor:
@@ -65,7 +65,7 @@ class MessageDAO:
 
     def messageLikes(self, mid):
         cursor = self.conn.cursor()
-        query = 'select username from message as m, "like" as l, "user" as u where m.mid=l.mid and u.uid=l.uid and m.mid=%s;'
+        query = 'select username from message natural inner join "like" natural inner join "user" where mid=%s;'
         result = []
         cursor.execute(query, (mid, ))
         for m in cursor:
@@ -92,7 +92,7 @@ class MessageDAO:
 
     def countLikesMessage(self, mid):
         cursor = self.conn.cursor()
-        query = 'select count(*) from message as m, "like" as l, "user" as u where m.mid=l.mid and u.uid=l.uid and m.mid=%s;'
+        query = 'select count(*) from message natural inner join "like" natural inner join "user" where mid=%s;'
         cursor.execute(query, (mid, ))
         return cursor.fetchone()[0]
 

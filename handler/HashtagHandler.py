@@ -16,7 +16,7 @@ class HashtagHandler:
 
     def getAllhashtags(self):
         hash = HashtagDao().allHashtags()
-        if not hash:
+        if hash == None:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for h in hash:
@@ -25,7 +25,7 @@ class HashtagHandler:
 
     def getmessagewithhas(self, hashtext):
         hash = HashtagDao().messageWSpecificHash(hashtext)
-        if not hash:
+        if hash == None:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in hash:
@@ -34,7 +34,7 @@ class HashtagHandler:
 
     def gethashsInMessage(self, mid):
         hash = HashtagDao().hashtagsInMessage(mid)
-        if not hash:
+        if hash == None:
             return jsonify(Error="NOT FOUND"), 404
         result = []
         for m in hash:
