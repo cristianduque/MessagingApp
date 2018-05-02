@@ -145,7 +145,7 @@ def contactsOfUsers(uid):
     handler = ContactListHandler()
     return handler.getAllContactsFromUser(uid)
 
-@app.route('/SocialMessagingApp/contactlist') #deberia no mostrar los usuarios que hay en cada contact list, sino el total y owner
+@app.route('/SocialMessagingApp/contactlist') #ok
 def allContactList():
     handler = ContactListHandler()
     return handler.getAllContactLists()
