@@ -9,7 +9,7 @@ class ContactListDAO:
 
     def allContactLists(self):
         cursor = self.conn.cursor()
-        query = 'select uid, username, count(*) from contactlist natural inner join "user" group by uid, username;'
+        query = "select * from contactlist;"
         cursor.execute(query)
         result = []
         for row in cursor:
