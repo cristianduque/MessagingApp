@@ -2,8 +2,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
     function($http, $log, $scope) {
         var thisCtrl = this;
 
-        this.msgHW = [20];
-        this.backup = [];
+        this.msgHW = [];
         //   0MID, 1TEXT, 2AUTHOR, 3LIKE, 4DISLIKE
         var m1 = [0, "Holita", "Gladymar", 7, 10];
         var m2 = [1, "ADIOSSSS", "Cristian", 10, 5];
@@ -43,7 +42,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         };
 
         this.loadLikesAndDislikes = function(){
-            window.location = "http://localhost:63342/MessagingApp/pages/interactions.html";
+            window.location = "http://localhost:63343/SocialMessagingApp/pages/interactions.html";
         };
 
         this.likeadd= function(t) {
