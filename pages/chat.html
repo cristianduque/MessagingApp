@@ -55,9 +55,13 @@
                             </p>
                         </div>
                         <div class="card-action">
-                            <a class="btn-floating btn-small waves-effect grey"><i class="material-icons">thumb_up
+                            <button ng-click="chatCtrl.likeadd(m.id)">
+                                <a class="btn-floating btn-small waves-effect grey"><i class="material-icons">thumb_up </i></a>
+                            </button>
                             </i></a> <button ng-bind= "m.like" ng-click="chatCtrl.loadLikesAndDislikes()">{{m.like}} </button>
-                            <a class="btn-floating btn-small waves-effect waves-light grey"><i class="material-icons">thumb_down
+                            <button ng-click="chatCtrl.dislikeadd(m.id)">
+                                <a class="btn-floating btn-small waves-effect grey"><i class="material-icons">thumb_down </i></a>
+                            </button>
                             </i></a><button ng-bind="m.nolike" ng-click="chatCtrl.loadLikesAndDislikes()">{{m.nolike}} </button>
                             <a class="btn-floating btn-small waves-effect  grey"><i class="material-icons">reply
                             </i></a><span ng-bind="m.replies">  </span>
