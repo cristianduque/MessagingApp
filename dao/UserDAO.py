@@ -1,5 +1,7 @@
 from dao.MessageDAO import MessageDAO
+import subprocess
 import psycopg2
+import os
 from config.dbconfig import pg_config
 
 class UserDAO:

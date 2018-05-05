@@ -1,7 +1,7 @@
 pg_config = {
-    'dbname': 'socialappdb',
-    'user' : 'socialappdb',
-    'password' : 'icom5016',
-    'host' : 'socialmessagingapp.ckktp1avz4hd.us-east-2.rds.amazonaws.com',
+    'dbname': 'd7tocd1n85jbfo',
+    'user' : 'hiajlsnssrogml',
+    'password' : '34146d8441d2f16f0a5fe205a035c636ec718405ffa0997cd8e7bc0154f1642e',
+    'host' : 'ec2-174-129-41-64.compute-1.amazonaws.com',
     'port' : '5432'
 }
