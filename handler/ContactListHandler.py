@@ -8,7 +8,7 @@ class ContactListHandler:
         return mapped
 
     def mapToDict(self, row):
-        result = {'contactid': row[0]}
+        result = {'contactid': row[0], 'contactusername': row[1]}
         return result
 
     def getAllContactLists(self):

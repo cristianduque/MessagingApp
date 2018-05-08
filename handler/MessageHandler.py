@@ -120,11 +120,10 @@ class MessageHandler:
         return {'userThatLiked': d[0]}
 
     def maplikesall(self, d):
-        return {'userThatLiked': d[0]}
+        return {'MessageID': d[0], 'userThatLiked': d[1]}
 
     def mapdislikesall(self, d):
-        return {'userThatDisliked': d[0]}
-
+        return {'MessageID': d[0], 'userThatDisliked': d[1]}
 
     def mapreply(self, d):
         return {'Username': d[1], 'Reply': d[0][0] }
