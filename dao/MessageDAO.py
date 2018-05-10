@@ -23,6 +23,16 @@ class MessageDAO:
 
     def messagesFromChat(self, cid):
         cursor = self.conn.cursor()
+        query = 'with likes as (select count(uid) as likes, mid from "like" group by mid), dislikes as (select count(uid) as dislikes, mid from dislike group by mid) select distinct u.username, m.mid, time, text, coalesce(likes.likes, 0) as likes, coalesce(dislikes.dislikes,0) as dislikes from chat as c natural inner join message as m natural inner join "user" as u left join dislikes on (m.mid = dislikes.mid) left join likes on (m.mid = likes.mid) where c.cid=%s group by likes.likes, dislikes.dislikes, u.username, m.mid;'
+        result = []
+        cursor.execute(query, (cid, ))
+        for m in cursor:
+            result.append(m)
+        return result
+
+    #original one
+    def messagesFromChatwith(self, cid):
+        cursor = self.conn.cursor()
         query = 'select username, mid, time, text  from chat natural inner join message natural inner join "user" where cid=%s;'
         result = []
         cursor.execute(query, (cid, ))
