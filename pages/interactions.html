@@ -1,5 +1,56 @@
-<div class="modal-header" xmlns="http://www.w3.org/1999/html">
-  <h1>Users who have reacted to this message: </h1>
+<!DOCTYPE html>
+<html lang="en" ng-app="AppChat">
+<head>
+  <meta charset="UTF-8">
+  <title>Likes</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <!-- 	<link href="css/bootstrap.css" rel="stylesheet">
+      <script src="js/bootstrap.js"></script>
+      <script src="js/bootstrap.bundle.js"></script>-->
+
+  <!-- Materialize -->
+  <link href = "css/materialize.css" rel = "stylesheet">
+  <script src="js/materialize.js"></script>
+  <!-- AngularJS -->
+  <script src="js/angular.js"></script>
+  <script src="js/angular-route.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<style>
+  body{
+    color: red;
+    background-color: #ccf2ff;
+    font-family: Courier new;
+  }
+  #imgg{
+    size: 15px;
+    float: left;
+    margin: 10px;
+    margin-bottom: cover;
+    z-index:-1
+
+  }
+  #heat2{
+    position: center;
+    family-font:
+    float: center;
+    z-index:0;
+  }
+</style>
+
+<body>
+<div id="imgg">
+  <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/3766-200.png">
+</div>
+<div id="heat2">
+  <h2>Users Interactions</h2>
+</div>
+<div id="body">
+  <body>
+  <ng-view>
 </div>
 <div class="modal-body">
   <p> goneill</p>
@@ -10,3 +61,10 @@
   <button onclick="window.history.go(-1); return false;">Close</button>
 </div>
 </div>
+  </ng-view>
+  <script type="text/javascript" src="appjs/main.js"></script>
+  <script type="text/javascript" src="appjs/chat.js"></script>
+  <!--script type="text/javascript" src="appjs/message.js"></script-->
+  </body>
+</div>
+
