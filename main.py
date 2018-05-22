@@ -155,5 +155,13 @@ def getChat(cid):
     handler = ChatHandler()
     return handler.getChat(cid)
 
+@app.route('/SocialMessagingApp/message/post', methods=['GET', 'PUT', 'DELETE'])
+def postmessage():
+    if request.method == 'PUT':
+        MessageHandler().postmessageh(request.form)
+        return
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
 if __name__ == '__main__':
     app.run()
