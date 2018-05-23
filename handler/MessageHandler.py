@@ -113,8 +113,15 @@ class MessageHandler:
             return jsonify(Error="NOT FOUND"), 404
         return jsonify(LikesInMessage=dao)
 
-    def postmessageh(self):
-        MessageDAO().postmessage()
+    def postmessageh(self, msginfo):
+        uid = msginfo['uid']
+        cid = msginfo['cid']
+        text = msginfo['text']
+        m = MessageDAO().postmessage(cid, uid, text)
+        if not m:
+            return jsonify(Error="NOT FOUND"), 404
+        result = {'mid': m[0]}
+        return jsonify(Message=result)
 
     def mapdislikes(self, d):
         return {'userThatDisliked': d[0]}

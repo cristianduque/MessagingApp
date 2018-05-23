@@ -5,19 +5,21 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.msgHW = [];
         this.messageList = [];
         this.newText = "";
+        this.username= 2;
 
         this.loadMessages = function(){
             thisCtrl.loadMessageDB().then(function(response){
                 thisCtrl.msgHW = response.data.MessagesFromChat;
                 var n=thisCtrl.msgHW.length;
+                $log.error("Message Loaded: ", JSON.stringify(thisCtrl.msgHW));
 
-                for(var i=0; i<n; i++){
+
+                for(var i=n; i>=0; i--){
                     var m = thisCtrl.msgHW[i];
                     if (m!=null)
-                        thisCtrl.messageList.unshift({"id": m.MessageID, "text": m.Text, "author": m.Username, "like": m.Likes, "nolike": m.Dislikes});
+                        thisCtrl.messageList.push({"id": m.MessageID, "text": m.Text, "author": m.Username, "like": m.Likes, "nolike": m.Dislikes});
                 }
 
-                thisCtrl.checkmsgHW();
             }, function(error){
                 var status = error.status;
 
@@ -44,6 +46,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             // Get the list of parts from the servers via REST API
 
             // First set up the url for the route
+            //EEHW
             var url = "http://localhost:5000/SocialMessagingApp/chat/message/1";
             // Now set up the $http object
             // It has two function call backs, one for success and one for error
@@ -53,8 +56,17 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.postMsg = function(){
             var msg = thisCtrl.newText;
             // Need to figure out who I am
-            var author = "Me";
-            thisCtrl.messageList.unshift({"text": msg, "author": author, "like": 0, "nolike": 0});
+            //EEHW
+            data = {'cid': 1, 'uid': 4, 'text': msg}
+            $http({
+                url: 'http://localhost:5000/SocialMessagingApp/message/post',
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                data: JSON.stringify(data)
+            }).then(function(response){
+                var m = response.data.Message;
+                thisCtrl.messageList.push({"id": m['mid'], "text": msg, "author": 'SALIO', "like": 0, "nolike": 0});
+            });
             thisCtrl.newText = "";
         };
 
