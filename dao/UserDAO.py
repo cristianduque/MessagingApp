@@ -50,7 +50,7 @@ class UserDAO:
 
     def getInformationOfUserById(self, uid):
         cursor = self.conn.cursor()
-        query = 'select uid, firstname, lastname, phone, email, is_active, username from "user" where uid = %s;'
+        query = 'select * from "user" where uid = %s;'
         cursor.execute(query, (uid, ))
         result = []
         for row in cursor:
@@ -60,7 +60,7 @@ class UserDAO:
 
     def getInformationOfUserByUsername(self, username):
         cursor = self.conn.cursor()
-        query = 'select uid, firstname, lastname, phone, email, is_active, username from "user" where username = %s;'
+        query = 'select * from "user" where username = %s;'
         cursor.execute(query, (username, ))
         result = []
         for row in cursor:

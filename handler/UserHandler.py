@@ -5,7 +5,7 @@ from dao.UserDAO import UserDAO
 class UserHandler:
 
     def mapToDict(self, row):
-        result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4], 'active': row[5], 'username': row[6]}
+        result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4], 'password': row[5], 'active': row[6], 'username': row[7]}
         return result
 
     def getAllUsers(self):
