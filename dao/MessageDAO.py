@@ -6,6 +6,12 @@ class MessageDAO:
         connection_url = "dbname=%s user=%s password=%s host=%s port=%s" % (pg_config['dbname'], pg_config['user'], pg_config['password'], pg_config['host'], pg_config['port'])
         self.conn = psycopg2.connect(connection_url)
 
+    def postmessage(self, cid, uid, text):
+        cursor = self.conn.cursor()                        #chat id, user id   message format '{messages goes here}'
+        query = 'insert into message(cid, uid, time, text) values (%s, %s, CURRENT_TIMESTAMP, %s);'
+        cursor.execute(query, (cid, uid, text, ))
+        self.conn.commit()
+
     def allMessages(self):
         cursor = self.conn.cursor()
         query = 'select  mid, text, chatname, time, username from chat natural inner join message natural inner join "user";'
@@ -14,7 +20,7 @@ class MessageDAO:
 
     def messageById(self, mid):
         cursor = self.conn.cursor()
-        query =  'select mid, text, chatname, time, username  from chat natural inner join message natural inner join "user" where mid=%s'
+        query = 'select mid, text, chatname, time, username  from chat natural inner join message natural inner join "user" where mid=%s'
         cursor.execute(query, (mid, ))
         result = []
         for m in cursor:
@@ -111,4 +117,3 @@ class MessageDAO:
         query = 'select count(*) from message as m, dislike as d, "user" as u where m.mid=d.mid and u.uid=d.uid and m.mid=%s;'
         cursor.execute(query, (mid, ))
         return cursor.fetchone()[0]
-
