@@ -8,9 +8,11 @@ class MessageDAO:
 
     def postmessage(self, cid, uid, text):
         cursor = self.conn.cursor()                        #chat id, user id   message format '{messages goes here}'
-        query = 'insert into message(cid, uid, time, text) values (%s, %s, CURRENT_TIMESTAMP, %s);'
+        query = 'insert into message(cid, uid, time, text) values (%s, %s, CURRENT_TIMESTAMP, %s) returning  mid;'
         cursor.execute(query, (cid, uid, text, ))
+        result = cursor.fetchone()
         self.conn.commit()
+        return result
 
     def allMessages(self):
         cursor = self.conn.cursor()
@@ -29,7 +31,7 @@ class MessageDAO:
 
     def messagesFromChat(self, cid):
         cursor = self.conn.cursor()
-        query = 'with likes as (select count(uid) as likes, mid from "like" group by mid), dislikes as (select count(uid) as dislikes, mid from dislike group by mid) select distinct u.username, m.mid, time, text, coalesce(likes.likes, 0) as likes, coalesce(dislikes.dislikes,0) as dislikes from chat as c natural inner join message as m natural inner join "user" as u left join dislikes on (m.mid = dislikes.mid) left join likes on (m.mid = likes.mid) where c.cid=%s group by likes.likes, dislikes.dislikes, u.username, m.mid;'
+        query = 'with likes as (select count(uid) as likes, mid from "like" group by mid), dislikes as (select count(uid) as dislikes, mid from dislike group by mid) select distinct u.username, m.mid, time, text, coalesce(likes.likes, 0) as likes, coalesce(dislikes.dislikes,0) as dislikes from chat as c natural inner join message as m natural inner join "user" as u left join dislikes on (m.mid = dislikes.mid) left join likes on (m.mid = likes.mid) where c.cid=%s group by likes.likes, dislikes.dislikes, u.username, m.mid order by time;'
         result = []
         cursor.execute(query, (cid, ))
         for m in cursor:
