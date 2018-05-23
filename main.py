@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, redirect, url_for, request
 from handler.UserHandler import UserHandler
 from handler.ChatHandler import ChatHandler
 from handler.ContactListHandler import ContactListHandler
@@ -17,9 +17,19 @@ app.config["JSON_SORT_KEYS"] = False
 def home():
     return "Welcome Intruder!"
 
-@app.route('/SocialMessagingApp/login') #OK
+@app.route('/SocialMessagingApp/login', methods=['GET', 'POST'])
 def login():
-    return "LOGIN GOES HERE"
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        result = UserHandler().getCredentials(username, password)
+        if not result:
+            return redirect('http://localhost:63342/MessagingApp/pages/login.html')
+        else:
+            return redirect('http://localhost:63342/MessagingApp/index.html')
+    else:
+        return redirect('http://localhost:63342/MessagingApp/pages/login.html')
 
 @app.route('/SocialMessagingApp/') #OK
 def homeforApp():

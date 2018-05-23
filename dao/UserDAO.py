@@ -67,3 +67,11 @@ class UserDAO:
             result.append(row)
         self.conn.close()
         return result
+
+    def getCredentials(self, username, password):
+        cursor = self.conn.cursor()
+        query = 'select username, password from "user" where username = %s and password = %s;'
+        cursor.execute(query, (username, password))
+        result = cursor.fetchone()
+        self.conn.close()
+        return result[0]
