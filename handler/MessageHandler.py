@@ -5,14 +5,14 @@ from dao.HashtagDAO import HashtagDao
 class MessageHandler:
 
     def maptoDicMessage(self, m):
-        mapped = {'MessageId': m[0], 'Message': m[1][0], 'Chat': m[2], 'Date': m[3], 'Username': m[4]}
+        mapped = {'MessageId': m[0], 'Message': m[1], 'Chat': m[2], 'Date': m[3], 'Username': m[4]}
         return mapped
 
     def mapChatMessage(self, m):
-        return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3][0]}
+        return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3], 'Likes': m[4], 'Dislikes': m[5]}
 
     def mapUserMessage(self, m):
-        return {'Chatname': m[0], 'ChatID': m[1], 'MessageID': m[2], 'Time': m[3], 'Text': m[4][0]}
+        return {'Chatname': m[0], 'ChatID': m[1], 'MessageID': m[2], 'Time': m[3], 'Text': m[4]}
 
     def getMessageById(self, mid):
         messages = MessageDAO().messageById(mid)
@@ -113,6 +113,9 @@ class MessageHandler:
             return jsonify(Error="NOT FOUND"), 404
         return jsonify(LikesInMessage=dao)
 
+    def postmessageh(self):
+        MessageDAO().postmessage()
+
     def mapdislikes(self, d):
         return {'userThatDisliked': d[0]}
 
@@ -126,5 +129,5 @@ class MessageHandler:
         return {'MessageID': d[0], 'userThatDisliked': d[1]}
 
     def mapreply(self, d):
-        return {'Username': d[1], 'Reply': d[0][0] }
+        return {'Username': d[1], 'Reply': d[0]}
 

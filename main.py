@@ -5,11 +5,11 @@ from handler.ContactListHandler import ContactListHandler
 from handler.HashtagHandler import HashtagHandler
 from handler.MessageHandler import MessageHandler
 from handler.DashboardHandler import DashboardHandler
-#from flask_cors import CORS, cross_origin
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 
-#CORS(app)
+CORS(app)
 app.config["JSON_SORT_KEYS"] = False
 
 
@@ -154,6 +154,14 @@ def allContactList():
 def getChat(cid):
     handler = ChatHandler()
     return handler.getChat(cid)
+
+@app.route('/SocialMessagingApp/message/post', methods=['GET', 'PUT', 'DELETE'])
+def postmessage():
+    if request.method == 'PUT':
+        MessageHandler().postmessageh(request.form)
+        return
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 if __name__ == '__main__':
     app.run()
