@@ -5,6 +5,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.msgHW = [];
         this.messageList = [];
         this.newText = "";
+        this.username= 2;
 
         this.loadMessages = function(){
             thisCtrl.loadMessageDB().then(function(response){
@@ -53,8 +54,15 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.postMsg = function(){
             var msg = thisCtrl.newText;
             // Need to figure out who I am
-            var author = "Me";
-            thisCtrl.messageList.unshift({"text": msg, "author": author, "like": 0, "nolike": 0});
+            data = {'cid': 1, 'uid': 3, 'text': msg}
+            $http({
+                url: 'http://localhost:5000/SocialMessagingApp/message/post',
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                data: JSON.stringify(data)
+            }).success(function(data) {
+                console.log(data)
+            });
             thisCtrl.newText = "";
         };
 

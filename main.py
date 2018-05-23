@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from handler.UserHandler import UserHandler
 from handler.ChatHandler import ChatHandler
 from handler.ContactListHandler import ContactListHandler
@@ -155,10 +155,10 @@ def getChat(cid):
     handler = ChatHandler()
     return handler.getChat(cid)
 
-@app.route('/SocialMessagingApp/message/post', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/SocialMessagingApp/message/post', methods=['PUT'])
 def postmessage():
     if request.method == 'PUT':
-        MessageHandler().postmessageh(request.form)
+        MessageHandler().postmessageh(request.get_json())
         return
     else:
         return jsonify(Error="Method not allowed."), 405
