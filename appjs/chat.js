@@ -64,9 +64,8 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 headers: { 'Content-Type': 'application/json' },
                 data: JSON.stringify(data)
             }).then(function(response){
-                m = response.data.Message
-                thisCtrl.messageList.push({"id": m['mid'], "text": msg, "author": kruiz, "like": m.Likes, "nolike": m.Dislikes});
-
+                var m = response.data.Message;
+                thisCtrl.messageList.push({"id": m['mid'], "text": msg, "author": 'SALIO', "like": 0, "nolike": 0});
             });
             thisCtrl.newText = "";
         };

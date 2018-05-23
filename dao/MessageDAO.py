@@ -10,7 +10,7 @@ class MessageDAO:
         cursor = self.conn.cursor()                        #chat id, user id   message format '{messages goes here}'
         query = 'insert into message(cid, uid, time, text) values (%s, %s, CURRENT_TIMESTAMP, %s) returning  mid;'
         cursor.execute(query, (cid, uid, text, ))
-        result = cursor.fetchone()
+        result = cursor.fetchone()[0]
         self.conn.commit()
         return result
 
