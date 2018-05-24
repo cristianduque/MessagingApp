@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, request, jsonify
 from handler.UserHandler import UserHandler
 from handler.ChatHandler import ChatHandler
 from handler.ContactListHandler import ContactListHandler
@@ -17,19 +17,9 @@ app.config["JSON_SORT_KEYS"] = False
 def home():
     return "Welcome Intruder!"
 
-@app.route('/SocialMessagingApp/login', methods=['GET', 'POST'])
+@app.route('/SocialMessagingApp/login') #OK
 def login():
-    error = None
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        result = UserHandler().getCredentials(username, password)
-        if not result:
-            return redirect('http://localhost:63342/MessagingApp/pages/login.html')
-        else:
-            return redirect('http://localhost:63342/MessagingApp/index.html')
-    else:
-        return redirect('http://localhost:63342/MessagingApp/pages/login.html')
+    return "LOGIN GOES HERE"
 
 @app.route('/SocialMessagingApp/') #OK
 def homeforApp():
@@ -164,6 +154,33 @@ def allContactList():
 def getChat(cid):
     handler = ChatHandler()
     return handler.getChat(cid)
+
+@app.route('/SocialMessagingApp/message/post', methods=['PUT'])
+def postmessage():
+    handler = MessageHandler()
+    if request.method == 'PUT':
+        m = handler.postmessageh(request.json)
+        return m[0]
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/SocialMessagingApp/message/like/insert', methods=['PUT'])
+def putlike():
+    handler = MessageHandler()
+    if request.method == 'PUT':
+        handler.liked(request.json)
+        print("supuestamente lo ejecuta")
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/SocialMessagingApp/message/dislike/insert', methods=['PUT'])
+def putdislike():
+    handler = MessageHandler()
+    if request.method == 'PUT':
+        handler.disliked(request.json)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
 
 if __name__ == '__main__':
     app.run()

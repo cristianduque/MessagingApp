@@ -119,3 +119,15 @@ class MessageDAO:
         query = 'select count(*) from message as m, dislike as d, "user" as u where m.mid=d.mid and u.uid=d.uid and m.mid=%s;'
         cursor.execute(query, (mid, ))
         return cursor.fetchone()[0]
+
+    def insertlike(self, uid, mid):
+        cursor = self.conn.cursor()
+        query = 'insert into "like" values (%s, %s)'
+        cursor.execute(query, (uid, mid))
+        self.conn.commit()
+
+    def insertdislike(self, uid, mid):
+        cursor = self.conn.cursor()
+        query = 'insert into "like" values (%s, %s)'
+        cursor.execute(query, (uid, mid))
+        self.conn.commit()
