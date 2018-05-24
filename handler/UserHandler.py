@@ -8,6 +8,11 @@ class UserHandler:
         result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4], 'password': row[5], 'active': row[6], 'username': row[7]}
         return result
 
+    def mapToDict2(self, row):
+        result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4],
+                  'password': row[5], 'username': row[6]}
+        return result
+
     def getAllUsers(self):
         dao = UserDAO()
         result = dao.getAllUsers()
@@ -53,7 +58,7 @@ class UserHandler:
             return jsonify(Error="NOT FOUND"), 404
         mapped_result = []
         for r in result:
-            mapped_result.append(self.mapToDict(r))
+            mapped_result.append(self.mapToDict2(r))
         return jsonify(UserInfo=mapped_result)
 
     def getMessagesByUserId(self,id):
@@ -75,6 +80,35 @@ class UserHandler:
             return jsonify(Error="NOT FOUND"), 404
         else:
             return jsonify(Credentials=result)
+
+    def getUserByUsernameAndPassword(self, form):
+        if len(form) != 2:
+            return jsonify(Error="Malformed post request"), 400
+        username = form['username']
+        password = form['password']
+        if not username or not password:
+            return jsonify(Error="Unexpected attributes in post request"), 400
+        dao = UserDAO()
+        result = dao.getUserByUsernameAndPassword(username, password)
+        return jsonify(User=self.mapToDict(result))
+
+    def insertUser(self, form):
+        if len(form) != 6:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            firstname = form['firstname']
+            lastname = form['lastname']
+            phone = form['phone']
+            email = form['email']
+            password = form['password']
+            username = form['username']
+            if firstname and lastname and email and phone and password and username:
+                dao = UserDAO()
+                uid = dao.insertUser(firstname, lastname, phone, email, password, username)
+                result = self.mapToDict2([uid, firstname, lastname, phone, email, password, username])
+                return jsonify(Part=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
 
     def maptoChatDict(self, row):
         result = {'cid': row[0], 'chatname': row[1]}

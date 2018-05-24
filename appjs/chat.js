@@ -1,5 +1,5 @@
-angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope',
-    function($http, $log, $scope) {
+angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope', '$location', '$routeParams',
+    function($http, $log, $scope, $location, $routeParams) {
         var thisCtrl = this;
 
         this.msgHW = [];

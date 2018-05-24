@@ -17,19 +17,16 @@ app.config["JSON_SORT_KEYS"] = False
 def home():
     return "Welcome Intruder!"
 
-@app.route('/SocialMessagingApp/login', methods=['GET', 'POST'])
+@app.route('/SocialMessagingApp/login', methods=['POST'])
 def login():
-    error = None
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        result = UserHandler().getCredentials(username, password)
-        if not result:
-            return redirect('http://localhost:63342/MessagingApp/pages/login.html')
-        else:
-            return redirect('http://localhost:63342/MessagingApp/index.html')
-    else:
-        return redirect('http://localhost:63342/MessagingApp/pages/login.html')
+        return UserHandler().getUserByUsernameAndPassword(request.get_json('data'))
+
+@app.route('/SocialMessagingApp/register', methods=['POST'])
+def register():
+    if request.method =='POST':
+        return UserHandler().insertUser(request.get_json('data'))
+
 
 @app.route('/SocialMessagingApp/') #OK
 def homeforApp():
@@ -164,6 +161,14 @@ def allContactList():
 def getChat(cid):
     handler = ChatHandler()
     return handler.getChat(cid)
+
+@app.route('/SocialMessagingApp/message/post', methods=['PUT'])
+def postmessage():
+    if request.method == 'PUT':
+        r = MessageHandler().postmessageh(request.get_json())
+        return r
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 if __name__ == '__main__':
     app.run()
