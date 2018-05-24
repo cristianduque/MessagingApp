@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, redirect, url_for, request
 from handler.UserHandler import UserHandler
 from handler.ChatHandler import ChatHandler
 from handler.ContactListHandler import ContactListHandler
@@ -17,9 +17,19 @@ app.config["JSON_SORT_KEYS"] = False
 def home():
     return "Welcome Intruder!"
 
-@app.route('/SocialMessagingApp/login') #OK
+@app.route('/SocialMessagingApp/login', methods=['GET', 'POST'])
 def login():
-    return "LOGIN GOES HERE"
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        result = UserHandler().getCredentials(username, password)
+        if not result:
+            return redirect('http://localhost:63342/MessagingApp/pages/login.html')
+        else:
+            return redirect('http://localhost:63342/MessagingApp/index.html')
+    else:
+        return redirect('http://localhost:63342/MessagingApp/pages/login.html')
 
 @app.route('/SocialMessagingApp/') #OK
 def homeforApp():
@@ -154,14 +164,6 @@ def allContactList():
 def getChat(cid):
     handler = ChatHandler()
     return handler.getChat(cid)
-
-@app.route('/SocialMessagingApp/message/post', methods=['PUT'])
-def postmessage():
-    if request.method == 'PUT':
-        r = MessageHandler().postmessageh(request.get_json())
-        return r
-    else:
-        return jsonify(Error="Method not allowed."), 405
 
 if __name__ == '__main__':
     app.run()

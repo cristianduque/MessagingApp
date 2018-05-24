@@ -68,6 +68,14 @@ class UserHandler:
 
             return jsonify(Messages=r)
 
+    def getCredentials(self, username, password):
+        dao = UserDAO()
+        result = dao.getCredentials(username, password)
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            return jsonify(Credentials=result)
+
     def maptoChatDict(self, row):
         result = {'cid': row[0], 'chatname': row[1]}
         return result
