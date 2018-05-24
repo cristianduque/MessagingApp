@@ -31,11 +31,12 @@ class MessageDAO:
 
     def messagesFromChat(self, cid):
         cursor = self.conn.cursor()
-        query = 'with likes as (select count(uid) as likes, mid from "like" group by mid), dislikes as (select count(uid) as dislikes, mid from dislike group by mid) select distinct u.username, m.mid, time, text, coalesce(likes.likes, 0) as likes, coalesce(dislikes.dislikes,0) as dislikes from chat as c natural inner join message as m natural inner join "user" as u left join dislikes on (m.mid = dislikes.mid) left join likes on (m.mid = likes.mid) where c.cid=%s group by likes.likes, dislikes.dislikes, u.username, m.mid order by time;'
+        query = 'with likes as (select count(uid) as likes, array_agg(u.username) as likeby, mid from "like" natural inner join "user" as u group by mid), dislikes as (select count(uid) as dislikes, array_agg(u.username) as dislikeby, mid from dislike natural inner join "user" as u group by mid) select distinct u.username, m.mid, time, text, likes.likeby, dislikes.dislikeby, coalesce(likes.likes, 0) as likes, coalesce(dislikes.dislikes, 0) as dislikes from chat as c natural inner join message as m natural inner join "user" as u left join dislikes on (m.mid = dislikes.mid) left join likes on (m.mid = likes.mid) where c.cid=1 group by likes.likes, dislikes.dislikes, u.username, m.mid, likes.likeby, dislikes.dislikeby order by time;'
         result = []
         cursor.execute(query, (cid, ))
         for m in cursor:
             result.append(m)
+        print(result)
         return result
 
     #original one

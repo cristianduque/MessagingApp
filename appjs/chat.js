@@ -24,12 +24,10 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.cid = mem.getItem('cid');
         this.uid = mem.getItem('uid');
 
-        console.log(thisCtrl.uid);
-
         this.loadMessages = function(){
-            console.log(thisCtrl.cid);
             thisCtrl.loadMessageDB().then(function(response){
                 thisCtrl.msgHW = response.data.MessagesFromChat;
+                console.log(this.msgHW);
                 var n=thisCtrl.msgHW.length;
                 $log.error("Message Loaded: ", JSON.stringify(thisCtrl.msgHW));
 
@@ -68,7 +66,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             // First set up the url for the route
             //EEHW
 
-            var url = "http://localhost:5000/SocialMessagingApp/chat/message/" + thisCtrl.chatinfo['cid'];
+            var url = "http://localhost:5000/SocialMessagingApp/chat/message/" + thisCtrl.cid;
             // Now set up the $http object
             // It has two function call backs, one for success and one for error
             return $http.get(url)
