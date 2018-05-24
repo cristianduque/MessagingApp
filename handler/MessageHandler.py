@@ -1,5 +1,5 @@
 from dao.MessageDAO import MessageDAO
-from flask import jsonify
+from flask import jsonify, make_response
 from dao.HashtagDAO import HashtagDao
 
 class MessageHandler:
@@ -120,8 +120,21 @@ class MessageHandler:
         m = MessageDAO().postmessage(cid, uid, text)
         if not m:
             return jsonify(Error="NOT FOUND"), 404
-        result = {'mid': m[0]}
-        return jsonify(Message=result)
+        result = {'mid': m}
+        print(result)
+        return jsonify(result), 201
+
+    def liked(self, likeinfo):
+        uid = likeinfo['uid']
+        mid = likeinfo['mid']
+        MessageDAO().insertlike(uid, mid)
+        return
+
+    def disliked(self, dislikeinfo):
+        uid = dislikeinfo['uid']
+        mid = dislikeinfo['mid']
+        MessageDAO().insertdislike(uid, mid)
+        return
 
     def mapdislikes(self, d):
         return {'userThatDisliked': d[0]}

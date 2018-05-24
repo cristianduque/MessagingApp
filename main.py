@@ -157,11 +157,30 @@ def getChat(cid):
 
 @app.route('/SocialMessagingApp/message/post', methods=['PUT'])
 def postmessage():
+    handler = MessageHandler()
     if request.method == 'PUT':
-        r = MessageHandler().postmessageh(request.get_json())
-        return r
+        m = handler.postmessageh(request.json)
+        return m[0]
     else:
         return jsonify(Error="Method not allowed."), 405
+
+@app.route('/SocialMessagingApp/message/like/insert', methods=['PUT'])
+def putlike():
+    handler = MessageHandler()
+    if request.method == 'PUT':
+        handler.liked(request.json)
+        print("supuestamente lo ejecuta")
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/SocialMessagingApp/message/dislike/insert', methods=['PUT'])
+def putdislike():
+    handler = MessageHandler()
+    if request.method == 'PUT':
+        handler.disliked(request.json)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
 
 if __name__ == '__main__':
     app.run()
