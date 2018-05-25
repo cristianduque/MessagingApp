@@ -20,7 +20,7 @@ def home():
 @app.route('/SocialMessagingApp/login', methods=['POST'])
 def login():
     if request.method == 'POST':
-        return UserHandler().getUserByUsernameAndPassword(request.get_json('data'))
+        return UserHandler().getCredentials(request.get_json('data'))
 
 @app.route('/SocialMessagingApp/register', methods=['POST'])
 def register():

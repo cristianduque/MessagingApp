@@ -73,15 +73,7 @@ class UserHandler:
 
             return jsonify(Messages=r)
 
-    def getCredentials(self, username, password):
-        dao = UserDAO()
-        result = dao.getCredentials(username, password)
-        if not result:
-            return jsonify(Error="NOT FOUND"), 404
-        else:
-            return jsonify(Credentials=result)
-
-    def getUserByUsernameAndPassword(self, form):
+    def getCredentials(self, form):
         if len(form) != 2:
             return jsonify(Error="Malformed post request"), 400
         username = form['username']
