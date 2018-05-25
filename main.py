@@ -168,8 +168,9 @@ def postmessage():
 def putlike():
     handler = MessageHandler()
     if request.method == 'PUT':
-        handler.liked(request.json)
-        print("supuestamente lo ejecuta")
+        m = handler.liked(request.json)
+        print(m)
+        return m[0]
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -177,7 +178,9 @@ def putlike():
 def putdislike():
     handler = MessageHandler()
     if request.method == 'PUT':
-        handler.disliked(request.json)
+        m = handler.disliked(request.json)
+        print(m)
+        return m[0]
     else:
         return jsonify(Error="Method not allowed."), 405
 

@@ -121,20 +121,21 @@ class MessageHandler:
         if not m:
             return jsonify(Error="NOT FOUND"), 404
         result = {'mid': m}
-        print(result)
         return jsonify(result), 201
 
     def liked(self, likeinfo):
         uid = likeinfo['uid']
         mid = likeinfo['mid']
-        MessageDAO().insertlike(uid, mid)
-        return
+        r = MessageDAO().insertlike(uid, mid)
+        print("tal veez llego aqui handler")
+        return jsonify(Result=r), 200
 
     def disliked(self, dislikeinfo):
         uid = dislikeinfo['uid']
         mid = dislikeinfo['mid']
-        MessageDAO().insertdislike(uid, mid)
-        return
+        r = MessageDAO().insertdislike(uid, mid)
+        print("tal veez llego aqui handler")
+        return jsonify(Result=r), 200
 
     def mapdislikes(self, d):
         return {'userThatDisliked': d[0]}
