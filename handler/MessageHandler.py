@@ -9,7 +9,7 @@ class MessageHandler:
         return mapped
 
     def mapChatMessage(self, m):
-        return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3], 'Likedby': m[4], 'Dislikedby': m[5], 'Likes': m[6], 'Dislikes': m[7]}
+        return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3], 'Likedby': m[4], 'Dislikedby': m[5], 'Likes': m[6], 'Dislikes': m[7], 'Reply'}
 
     def mapUserMessage(self, m):
         return {'Chatname': m[0], 'ChatID': m[1], 'MessageID': m[2], 'Time': m[3], 'Text': m[4]}
