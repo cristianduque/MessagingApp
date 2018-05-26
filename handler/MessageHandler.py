@@ -9,7 +9,7 @@ class MessageHandler:
         return mapped
 
     def mapChatMessage(self, m):
-        return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3], 'Likedby': m[4], 'Dislikedby': m[5], 'Likes': m[6], 'Dislikes': m[7], 'Reply'}
+        return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3], 'Likedby': m[4], 'Dislikedby': m[5], 'Reply': m[6], 'Likes': m[7], 'Dislikes': m[8], 'ReplyId': m[9]}
 
     def mapUserMessage(self, m):
         return {'Chatname': m[0], 'ChatID': m[1], 'MessageID': m[2], 'Time': m[3], 'Text': m[4]}
@@ -117,9 +117,12 @@ class MessageHandler:
         uid = msginfo['uid']
         cid = msginfo['cid']
         text = msginfo['text']
+        reply = msginfo['reply']
         m = MessageDAO().postmessage(cid, uid, text)
-        if not m:
-            return jsonify(Error="NOT FOUND"), 404
+        if reply != None:
+            print(reply)
+            print(m)
+            t = MessageDAO().insertreply(reply, m)
         result = {'mid': m}
         return jsonify(result), 201
 

@@ -26,15 +26,24 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.loadMessages = function(){
             thisCtrl.loadMessageDB().then(function(response){
                 thisCtrl.msgHW = response.data.MessagesFromChat;
+                console.log(response.data.MessagesFromChat);
+                console.log(thisCtrl.msgHW);
+                console.log(thisCtrl.msgHW[1]);
+                var un = thisCtrl.msgHW[1];
+                console.log(un);
 
                 var n=thisCtrl.msgHW.length;
                 //$log.error
                 //console.log
 
                 for(var i=n; i>=0; i--){
-                    var m = thisCtrl.msgHW[i];
-                    if (m!=null)
-                        thisCtrl.messageList.push({"mid": m.MessageID, "text": m.Text, "author": m.Username, "like": m.Likes, "nolike": m.Dislikes, "minfo": m});
+                    mr = thisCtrl.msgHW[i];
+                    if (mr!=null)
+                        if(mr.ReplyId == 0)
+                            thisCtrl.messageList.push({"mid": mr.MessageID, "text": mr.Text, "author": mr.Username, "like": mr.Likes, "nolike": mr.Dislikes, "minfo": mr, "reply": mr.Reply});
+                        else
+                            thisCtrl.messageList.push({"mid": mr.MessageID, "text": "Reply:" + mr.Text, "author": mr.Username, "like": mr.Likes, "nolike": mr.Dislikes, "minfo": mr, "reply": mr.Reply});
+
                 }
 
             }, function(error){
@@ -64,9 +73,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
             // First set up the url for the route
             //EEHW
-            console.log(thisCtrl.cid);
             var url = "http://localhost:5000/SocialMessagingApp/chat/message/" + thisCtrl.cid;
-            console.log(url);
             // Now set up the $http object
             // It has two function call backs, one for success and one for error
             return $http.get(url)
@@ -76,7 +83,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             var msg = thisCtrl.newText;
             // Need to figure out who I am
             //EEHW
-            data = {'cid': thisCtrl.cid, 'uid': thisCtrl.uid, 'text': msg};
+            data = {'cid': thisCtrl.cid, 'uid': thisCtrl.uid, 'text': msg,  'reply': null};
             $http({
                 url: 'http://localhost:5000/SocialMessagingApp/message/post',
                 method: "PUT",
@@ -84,7 +91,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 data: JSON.stringify(data)
             }).then(function(response){
                 var m = response.data.mid;
-                thisCtrl.messageList.unshift({"mid": m, "text": msg, "author": thisCtrl.username, "like": 0, "nolike": 0, "minfo": {'Likedby': null, 'Dislikedby': null}});
+                thisCtrl.messageList.unshift({"mid": m, "text": msg, "author": thisCtrl.username, "like": 0, "nolike": 0, "reply": null, "minfo": {'Likedby': null, 'Dislikedby': null}});
             }).catch(function(error){
                 console.log("este es el error" + error);
             });
@@ -96,7 +103,6 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         };
 
         this.likeadd= function(t) {
-            console.log(JSON.stringify(t.minfo.Likedby));
             var user;
             if(t.minfo.Likedby != null) {
                 for (var i = 0; i < t.minfo.Likedby.length; i++) {
@@ -123,7 +129,6 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         };
 
         this.dislikeadd= function(t) {
-            console.log(JSON.stringify(t.minfo.Dislikedby));
             var user;
             if(t.minfo.Dislikedby != null) {
                 for (var i = 0; i < t.minfo.Dislikedby.length; i++) {
@@ -149,9 +154,26 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             });
         };
 
-        this.replymsg = function(){
+        this.replymsg = function(m){
+            var msg = thisCtrl.newText;
+            // Need to figure out who I am
+            //EEHW
+            data = {'cid': thisCtrl.cid, 'uid': thisCtrl.uid, 'text': msg,  'reply': m['mid'] };
+            $http({
+                url: 'http://localhost:5000/SocialMessagingApp/message/post',
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                data: JSON.stringify(data)
+            }).then(function(response){
+                var mid = response.data.mid;
+                thisCtrl.messageList.unshift({"mid": mid, "text": "Reply:" + msg, "author": thisCtrl.username, "like": 0, "nolike": 0, "reply": m.text, "minfo": {'Likedby': null, 'Dislikedby': null}});
+            }).catch(function(error){
+                console.log("este es el error");
+            });
+            thisCtrl.newText = "";
 
         }
+
 
         this.loadMessages();
     }]);
