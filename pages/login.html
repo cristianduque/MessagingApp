@@ -1,108 +1,106 @@
+<div ng-cloak style="align-content: center">
 
-<style>
+    <style type="text/css">
+        #left {
+           float:left;
+           width:25%;
+           margin-left: 22.5%;
+        }
+        #right {
+           float:right;
+           width:25%;
+           margin-right: 22.5%;
+        }
+    </style>
 
-  * {
-box-sizing: border-box;
-}
+    <div id="left">
+        <form name="form" ng-submit="loginCtrl.checkLogin(login_username, login_password)" role="form">
+            <center><h5>LOGIN</h5></center>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <i class="fa fa-key"></i>
+                <div>
+                    <input type="text" name="username" id="username" class="form-control" ng-model="login_username" required />
+                </div>
+                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block"></span>
+            </div>
 
-*:focus {
-	outline: none;
-}
-body {
-font-family: Arial;
-background-color: #3498DB;
-padding: 50px;
-}
-.login {
-margin: 20px auto;
-width: 300px;
-}
-.login-screen {
-background-color: #FFF;
-padding: 20px;
-border-radius: 5px
-}
+            <div class="form-group">
+                <label for="password">Password</label>
+                <i class="fa fa-lock"></i>
+                <div>
+                    <input type="password" name="password" id="password" class="form-control" ng-model="login_password" required />
+                </div>
+                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block"></span>
+            </div>
 
-.app-title {
-text-align: center;
-color: #777;
-}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger">Login</button>
+            </div>
+        </form>
+    </div>
 
-.login-form {
-text-align: center;
-}
-.control-group {
-margin-bottom: 10px;
-}
+    <div id="right">
+        <form name="form" ng-submit="loginCtrl.register(firstname, lastname, phone, email, password, username)" role="form">
+            <center><h5>REGISTER</h5></center>
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <i class="fa fa-key"></i>
+                <div>
+                    <input type="text" name="firstname" id="firstname" class="form-control" ng-model="firstname" required />
+                </div>
+                <span ng-show="form.firstname.$dirty && form.firstname.$error.required" class="help-block"></span>
+            </div>
 
-input {
-text-align: center;
-background-color: #ECF0F1;
-border: 2px solid transparent;
-border-radius: 3px;
-font-size: 16px;
-font-weight: 200;
-padding: 10px 0;
-width: 250px;
-transition: border .5s;
-}
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <i class="fa fa-key"></i>
+                <div>
+                    <input type="text" name="lastname" id="lastname" class="form-control" ng-model="lastname" required />
+                </div>
+                <span ng-show="form.lastname.$dirty && form.lastname.$error.required" class="help-block"></span>
+            </div>
 
-input:focus {
-border: 2px solid #3498DB;
-box-shadow: none;
-}
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <i class="fa fa-key"></i>
+                <div>
+                    <input type="text" name="phone" id="phone" class="form-control" ng-model="phone" required />
+                </div>
+                <span ng-show="form.phone.$dirty && form.phone.$error.required" class="help-block"></span>
+            </div>
 
-.btn {
-  border: 2px solid transparent;
-  background: #3498DB;
-  color: #ffffff;
-  font-size: 16px;
-  line-height: 25px;
-  padding: 10px 0;
-  text-decoration: none;
-  text-shadow: none;
-  border-radius: 3px;
-  box-shadow: none;
-  transition: 0.25s;
-  display: block;
-  width: 250px;
-  margin: 0 auto;
-}
+            <div class="form-group">
+                <label for="email">Email</label>
+                <i class="fa fa-key"></i>
+                <div>
+                    <input type="email" name="email" id="email" class="form-control" ng-model="email" required />
+                </div>
+                <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block"></span>
+            </div>
 
-.btn:hover {
-  background-color: #2980B9;
-}
+            <div class="form-group">
+                <label for="password">Password</label>
+                <i class="fa fa-lock"></i>
+                <div>
+                    <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
+                </div>
+                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block"></span>
+            </div>
 
-.login-link {
-  font-size: 12px;
-  color: #444;
-  display: block;
-	margin-top: 12px;
-}
-</style>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <i class="fa fa-key"></i>
+                <div>
+                    <input type="text" name="username" id="username" class="form-control" ng-model="username" required />
+                </div>
+                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block"></span>
+            </div>
 
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger">Register</button>
+            </div>
+        </form>
+    </div>
 
-<form action="http://127.0.0.1:5000/SocialMessagingApp/login" method="POST">
-	<div class="login">
-		<div class="login-screen">
-			<div class="app-title">
-				<h1>Login</h1>
-			</div>
-
-			<div class="login-form">
-				<div class="control-group">
-				<input type="text" class="login-field" value="" placeholder="username" name="username">
-				<label class="login-field-icon fui-user" for="login-name"></label>
-				</div>
-
-				<div class="control-group">
-				<input type="password" class="login-field" value="" placeholder="password" name="password">
-				<label class="login-field-icon fui-lock" for="login-pass"></label>
-				</div>
-
-                <input type="submit" value="Log in" class="btn btn-primary btn-large btn-block" >
-			    <br>
-			</div>
-		</div>
-	</div>
-</form>
+</div>

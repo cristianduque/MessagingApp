@@ -50,7 +50,7 @@ class UserDAO:
 
     def getInformationOfUserById(self, uid):
         cursor = self.conn.cursor()
-        query = 'select uid, firstname, lastname, phone, email, is_active, username from "user" where uid = %s;'
+        query = 'select * from "user" where uid = %s;'
         cursor.execute(query, (uid, ))
         result = []
         for row in cursor:
@@ -60,7 +60,7 @@ class UserDAO:
 
     def getInformationOfUserByUsername(self, username):
         cursor = self.conn.cursor()
-        query = 'select uid, firstname, lastname, phone, email, is_active, username from "user" where username = %s;'
+        query = 'select username,password from "user" where username = %s;'
         cursor.execute(query, (username, ))
         result = []
         for row in cursor:
@@ -68,10 +68,17 @@ class UserDAO:
         self.conn.close()
         return result
 
-    def getCredentials(self, username, password):
+    def getUserByUsernameAndPassword(self, username, password):
         cursor = self.conn.cursor()
-        query = 'select username, password from "user" where username = %s and password = %s;'
-        cursor.execute(query, (username, password))
+        query = 'select * from "user" where username = %s and password = %s;'
+        cursor.execute(query, (username, password,))
         result = cursor.fetchone()
-        self.conn.close()
-        return result[0]
+        return result
+
+    def insertUser(self, firstname, lastname, phone, email, password, username):
+        cursor = self.conn.cursor()
+        query = 'insert into "user"(firstname, lastname, phone, email, password, username) values (%s, %s, %s, %s, %s, %s) returning uid;'
+        cursor.execute(query, (firstname, lastname, phone, email, password, username,))
+        uid = cursor.fetchone()[0]
+        self.conn.commit()
+        return uid

@@ -6,15 +6,13 @@
         $routeProvider.when('/login', {
             templateUrl: 'pages/login.html',
             controller: 'LoginController',
-            controllerAs : 'logingCtrl'
+            controllerAs : 'loginCtrl'
         }).when('/chat', {
             templateUrl: 'pages/chat.html',
             controller: 'ChatController',
             controllerAs : 'chatCtrl'
-        })
-        //hay que a-dair aqui los when de cada mensaje y a donde va redirect
-        .otherwise({
-            redirectTo: '/chat'
+        }).otherwise({
+            redirectTo: '/login'
         });
     }]);
     //

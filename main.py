@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, redirect, url_for, request
 from handler.UserHandler import UserHandler
 from handler.ChatHandler import ChatHandler
 from handler.ContactListHandler import ContactListHandler
@@ -17,9 +17,16 @@ app.config["JSON_SORT_KEYS"] = False
 def home():
     return "Welcome Intruder!"
 
-@app.route('/SocialMessagingApp/login') #OK
+@app.route('/SocialMessagingApp/login', methods=['POST'])
 def login():
-    return "LOGIN GOES HERE"
+    if request.method == 'POST':
+        return UserHandler().getCredentials(request.get_json('data'))
+
+@app.route('/SocialMessagingApp/register', methods=['POST'])
+def register():
+    if request.method =='POST':
+        return UserHandler().insertUser(request.get_json('data'))
+
 
 @app.route('/SocialMessagingApp/') #OK
 def homeforApp():
@@ -157,33 +164,11 @@ def getChat(cid):
 
 @app.route('/SocialMessagingApp/message/post', methods=['PUT'])
 def postmessage():
-    handler = MessageHandler()
     if request.method == 'PUT':
-        m = handler.postmessageh(request.json)
-        return m[0]
+        r = MessageHandler().postmessageh(request.get_json())
+        return r
     else:
         return jsonify(Error="Method not allowed."), 405
-
-@app.route('/SocialMessagingApp/message/like/insert', methods=['PUT'])
-def putlike():
-    handler = MessageHandler()
-    if request.method == 'PUT':
-        m = handler.liked(request.json)
-        print(m)
-        return m[0]
-    else:
-        return jsonify(Error="Method not allowed."), 405
-
-@app.route('/SocialMessagingApp/message/dislike/insert', methods=['PUT'])
-def putdislike():
-    handler = MessageHandler()
-    if request.method == 'PUT':
-        m = handler.disliked(request.json)
-        print(m)
-        return m[0]
-    else:
-        return jsonify(Error="Method not allowed."), 405
-
 
 if __name__ == '__main__':
     app.run()
