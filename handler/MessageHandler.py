@@ -9,7 +9,7 @@ class MessageHandler:
         return mapped
 
     def mapChatMessage(self, m):
-        return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3], 'Likes': m[4], 'Dislikes': m[5]}
+        return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3], 'Likedby': m[4], 'Dislikedby': m[5], 'Likes': m[6], 'Dislikes': m[7], 'Reply'}
 
     def mapUserMessage(self, m):
         return {'Chatname': m[0], 'ChatID': m[1], 'MessageID': m[2], 'Time': m[3], 'Text': m[4]}
@@ -121,20 +121,21 @@ class MessageHandler:
         if not m:
             return jsonify(Error="NOT FOUND"), 404
         result = {'mid': m}
-        print(result)
         return jsonify(result), 201
 
     def liked(self, likeinfo):
         uid = likeinfo['uid']
         mid = likeinfo['mid']
-        MessageDAO().insertlike(uid, mid)
-        return
+        r = MessageDAO().insertlike(uid, mid)
+        print("tal veez llego aqui handler")
+        return jsonify(Result=r), 200
 
     def disliked(self, dislikeinfo):
         uid = dislikeinfo['uid']
         mid = dislikeinfo['mid']
-        MessageDAO().insertdislike(uid, mid)
-        return
+        r = MessageDAO().insertdislike(uid, mid)
+        print("tal veez llego aqui handler")
+        return jsonify(Result=r), 200
 
     def mapdislikes(self, d):
         return {'userThatDisliked': d[0]}

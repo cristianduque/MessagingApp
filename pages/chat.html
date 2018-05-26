@@ -53,14 +53,23 @@
                             </p>
                         </div>
                         <div class="card-action">
+                            <!--this is like-->
                             <button ng-click="chatCtrl.likeadd(m)">
                                 <a class="btn-floating btn-small waves-effect grey"><i class="material-icons">thumb_up </i></a>
                             </button>
                             </i></a> <button ng-bind= "m.like" ng-click="chatCtrl.loadLikesAndDislikes()">{{m.like}} </button>
+
+
+
+
+
+
+                            <!--this is dislike-->
                             <button ng-click="chatCtrl.dislikeadd(m)">
                                 <a class="btn-floating btn-small waves-effect grey"><i class="material-icons">thumb_down </i></a>
                             </button>
                             </i></a><button ng-bind="m.nolike" ng-click="chatCtrl.loadLikesAndDislikes()">{{m.nolike}} </button>
+
                             <a class="btn-floating btn-small waves-effect  grey"><i class="material-icons">reply
                             </i></a><span ng-bind="m.replies">  </span>
                     </div>
