@@ -96,7 +96,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         };
 
         this.loadLikesAndDislikes = function(){
-            window.location = "http://localhost:63343/SocialMessagingApp/pages/interactions.html";
+            window.location = "http://localhost:63342/MessagingApp/pages/interactions.html?_ijt=n2qesaho2akm3biv9d64b5fpha";
         };
 
         this.likeadd= function(t) {
