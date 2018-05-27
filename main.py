@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, redirect, url_for, request
 from handler.UserHandler import UserHandler
 from handler.ChatHandler import ChatHandler
 from handler.ContactListHandler import ContactListHandler
@@ -17,9 +17,16 @@ app.config["JSON_SORT_KEYS"] = False
 def home():
     return "Welcome Intruder!"
 
-@app.route('/SocialMessagingApp/login') #OK
+@app.route('/SocialMessagingApp/login', methods=['POST'])
 def login():
-    return "LOGIN GOES HERE"
+    if request.method == 'POST':
+        return UserHandler().getCredentials(request.get_json('data'))
+
+@app.route('/SocialMessagingApp/register', methods=['POST'])
+def register():
+    if request.method =='POST':
+        return UserHandler().insertUser(request.get_json('data'))
+
 
 @app.route('/SocialMessagingApp/') #OK
 def homeforApp():
