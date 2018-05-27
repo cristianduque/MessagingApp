@@ -42,7 +42,7 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
                 $log.error("Users Loaded: ", JSON.stringify());
         };
 
-        this.register = function(firstname, lastname, phone, email, username, password){
+        this.register = function(firstname, lastname, phone, email, password, username){
             var reqURL = "http://localhost:5000/SocialMessagingApp/register";
                 console.log("reqURL: " + reqURL);
                 var data = {'firstname': firstname, 'lastname': lastname, 'phone': phone, 'email': email, 'password': password, 'username': username}
