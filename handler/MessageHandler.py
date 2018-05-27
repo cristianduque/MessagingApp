@@ -119,6 +119,12 @@ class MessageHandler:
         text = msginfo['text']
         reply = msginfo['reply']
         m = MessageDAO().postmessage(cid, uid, text)
+        pieces = text.split(" ")
+        hashtag = []
+        for txt in pieces:
+            if txt[0] == "#":
+                
+
         if reply != None:
             print(reply)
             print(m)

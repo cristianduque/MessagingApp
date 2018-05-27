@@ -27,7 +27,6 @@ def register():
     if request.method =='POST':
         return UserHandler().insertUser(request.get_json('data'))
 
-
 @app.route('/SocialMessagingApp/') #OK
 def homeforApp():
     return "Here goes a nice logo of our app and a very short descripion of what this does\n Basically we are doing WhatsApp from scratch. Thanks Professor! Very interesting..."

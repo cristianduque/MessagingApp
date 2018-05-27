@@ -8,7 +8,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
 
         mem.setItem('uid', 3);
-        mem.setItem('cid', 2);
+        mem.setItem('cid', 1);
         mem.setItem('chatname', 'nena');
         mem.setItem('username', 'kruiz');
 
@@ -81,6 +81,8 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         this.postMsg = function(){
             var msg = thisCtrl.newText;
+            if (msg=="")
+                return;
             // Need to figure out who I am
             //EEHW
             data = {'cid': thisCtrl.cid, 'uid': thisCtrl.uid, 'text': msg,  'reply': null};
@@ -98,8 +100,29 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             thisCtrl.newText = "";
         };
 
-        this.loadLikesAndDislikes = function(){
-            window.location = "http://localhost:63343/SocialMessagingApp/pages/interactions.html";
+        this.loadDislikes = function(m){
+            if(m.minfo.Dislikedby == null)
+                alert("No dislikes yet :)");
+            else {
+                var list = "User that disliked the message: \n";
+                var ref = m.minfo.Dislikedby;
+                for (var i = 0; i < m.minfo.Dislikedby.length; i++)
+                    list+= m.minfo.Dislikedby[i] + " \n";
+                alert(list);
+            }
+        }
+
+        this.loadLikes = function(m){
+            if(m.minfo.Likedby == null)
+                alert("No likes yet :(");
+            else {
+                var list = "User that liked the message: \n";
+                var ref = m.minfo.Likedby;
+                for (var i = 0; i < m.minfo.Likedby.length; i++)
+                    list+= m.minfo.Likedby[i] + " \n";
+                alert(list);
+            }
+            //window.location = "http://localhost:63343/SocialMessagingApp/pages/interactions.html";
         };
 
         this.likeadd= function(t) {
@@ -156,6 +179,8 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         this.replymsg = function(m){
             var msg = thisCtrl.newText;
+            if (msg=="")
+                return;
             // Need to figure out who I am
             //EEHW
             data = {'cid': thisCtrl.cid, 'uid': thisCtrl.uid, 'text': msg,  'reply': m['mid'] };

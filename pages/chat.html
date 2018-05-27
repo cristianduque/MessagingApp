@@ -61,13 +61,13 @@
                             <button ng-click="chatCtrl.likeadd(m)">
                                 <a class="btn-floating btn-small waves-effect grey"><i class="material-icons">thumb_up </i></a>
                             </button>
-                            </i></a> <button ng-bind= "m.like" ng-click="chatCtrl.loadLikesAndDislikes()">{{m.like}} </button>
+                            </i></a> <button ng-bind= "m.like" ng-click="chatCtrl.loadLikes(m)">{{m.like}} </button>
 
                             <!--this is dislike-->
                             <button ng-click="chatCtrl.dislikeadd(m)">
                                 <a class="btn-floating btn-small waves-effect grey"><i class="material-icons">thumb_down </i></a>
                             </button>
-                            </i></a><button ng-bind="m.nolike" ng-click="chatCtrl.loadLikesAndDislikes()">{{m.nolike}} </button>
+                            </i></a><button ng-bind="m.nolike" ng-click="chatCtrl.loadDislikes(m)">{{m.nolike}} </button>
 
                             <button ng-click="chatCtrl.replymsg(m)">
                                 <a class="btn-floating btn-small waves-effect  grey"><i class="material-icons">reply </i></a>
