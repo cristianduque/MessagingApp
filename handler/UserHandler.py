@@ -13,6 +13,10 @@ class UserHandler:
                   'password': row[5], 'username': row[6]}
         return result
 
+    def mapToDict3(self, row):
+        result = {'username': row[0], 'password': row[1]}
+        return result
+
     def getAllUsers(self):
         dao = UserDAO()
         result = dao.getAllUsers()
@@ -81,8 +85,8 @@ class UserHandler:
         if not username or not password:
             return jsonify(Error="Unexpected attributes in post request"), 400
         dao = UserDAO()
-        result = dao.getUserByUsernameAndPassword(username, password)
-        return jsonify(User=self.mapToDict(result))
+        result = dao.getCredentials(username, password)
+        return jsonify(User=self.mapToDict3(result))
 
     def insertUser(self, form):
         if len(form) != 6:

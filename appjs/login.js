@@ -21,22 +21,8 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
                     // This is the error function
                     // If we get here, some error occurred.
                     // Verify which was the cause and show an alert.
-                    var status = response.status;
-                    if (status == 0){
-                        alert("No hay conexion a Internet");
-                    }
-                    else if (status == 401){
-                        alert("Su sesion expiro. Conectese de nuevo.");
-                    }
-                    else if (status == 403){
-                        alert("No esta autorizado a usar el sistema.");
-                    }
-                    else if (status == 404){
-                        alert("No se encontro la informacion solicitada.");
-                    }
-                    else {
-                        alert("Error interno del sistema.");
-                    }
+                    alert("Username and password do not match. Try again.");
+
                 });
 
                 $log.error("Users Loaded: ", JSON.stringify());
@@ -58,22 +44,8 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
                     // This is the error function
                     // If we get here, some error occurred.
                     // Verify which was the cause and show an alert.
-                    var status = response.status;
-                    if (status == 0){
-                        alert("No hay conexion a Internet");
-                    }
-                    else if (status == 401){
-                        alert("Su sesion expiro. Conectese de nuevo.");
-                    }
-                    else if (status == 403){
-                        alert("No esta autorizado a usar el sistema.");
-                    }
-                    else if (status == 404){
-                        alert("No se encontro la informacion solicitada.");
-                    }
-                    else {
-                        alert("Error interno del sistema.");
-                    }
+                    alert("Invalid username. Try another.");
+
                 });
 
                 $log.error("Users Loaded: ", JSON.stringify());
