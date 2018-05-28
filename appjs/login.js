@@ -4,7 +4,7 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
         var thisCtrl = this;
         this.currentUser = {};
 
-        this.checkLogin = function(username, password){
+        this.login = function(username, password){
             var reqURL = "http://localhost:5000/SocialMessagingApp/login";
                 console.log("reqURL: " + reqURL);
                 var data = {'username': username, 'password': password}
