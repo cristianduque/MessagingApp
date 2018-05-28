@@ -171,10 +171,11 @@ def addUsertochat(cid, uid):
     handler = ChatHandler()
     return handler.addusertochat(cid, uid)
 
-@app.route('/SocialMessagingApp/contactlist/adduser/<int:owner>/<int:uid>') #PUTMETHOD
-def addUsertoContactList(owner, uid):
+@app.route('/SocialMessagingApp/contactlist/adduser/<int:owner>/<int:uid>',  methods=['PUT'])#PUTMETHOD
+def addUsertoContactList():
     handler = ContactListHandler()
-    return handler.contactaddition(owner, uid)
+    if request.method == 'PUT':
+        return handler.contactaddition(request.get_json('data'))
 
 @app.route('/SocialMessagingApp/chat/addchat/<int:owner>/<string:chatname>') #PUTMETHOD
 def createNewChat(owner, chatname):

@@ -1,13 +1,15 @@
 angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$scope', '$location', '$routeParams', 'currUser',
     function($http, $log, $scope, $location, $routeParams, currUser) {
 
+        var mem = sessionStorage;
         var thisCtrl = this;
         this.currentUser = currUser.getUser();
         this.contactList_id;
+        this.uid = mem.getItem('uid');
         this.contacts = [];
 
         this.loadContacts = function() {
-        var reqURL = "http://localhost:5000/SocialMessagingApp/user/contactlist/" + thisCtrl.currentUser.user_id;
+        var reqURL = "http://localhost:5000/SocialMessagingApp/user/contactlist/" + thisCtrl.uid;
             console.log("reqURL: " + reqURL);
             // Now issue the http request to the rest API
             $http.get(reqURL).then(
@@ -47,12 +49,12 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
             $log.error("Message Loaded: ", JSON.stringify(thisCtrl.messageList));
         };
 
-        this.addContact = function(username) {
-        var reqURL = "http://localhost:5000/MessagingApp/contactlist";
+        this.addContact = function(userid) {
+        var reqURL = "http://localhost:5000/SocialMessagingApp/contactlist/adduser/" + thisCtrl.uid + "/" + userid;
             console.log("reqURL: " + reqURL);
-            data = {"owner_id": thisCtrl.currentUser.user_id, "username": username}
+//            data = {"owner_id": thisCtrl.currentUser.user_id, "username": username}
             // Now issue the http request to the rest API
-            $http.post(reqURL, data).then(
+            $http.post(reqURL).then(
                 // Success function
                 function (response) {
                     console.log("data: " + JSON.stringify(response.data));
@@ -81,13 +83,7 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
         };
 
         this.showChats = function() {
-            $location.path('/user/gchats');
-        };
-
-        this.logout = function() {
-            currUser.deleteUser();
-            localStorage.removeItem('currentChat');
-            $location.path('/login')
+            $location.path('/chat');
         };
 
         this.loadContacts();

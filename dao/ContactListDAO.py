@@ -29,7 +29,7 @@ class ContactListDAO:
 
     def insertContacttoList(self, owner, uid):
         cursor = self.conn.cursor()
-        query = 'insert into contactlist values(%s, %s);'
+        query = 'insert into contactlist(uid,contact) values(%s, %s);'
         cursor.execute(query, (owner, uid))
         self.conn.commit()
         return "Done"
