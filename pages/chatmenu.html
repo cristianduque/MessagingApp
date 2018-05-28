@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div ng-cloak style="align-content: center">
+
+    <div id="title">
+        <center><h3>Available chat groups</h3></center>
+        <!--div ng-repeat="c in chatMenuCtrl.chatList"-->
+        <div class="-chat-btns">
+               <button ng-click="chatMenuCtrl.loadChatsDB()">
+                   <a class="btn-floating btn-small waves-effect grey"><i class="material-icons">{{c.Name}}</i></a>
+               </button>
+        </div>
+    </div>
+
+</div>
+
+

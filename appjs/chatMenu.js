@@ -1,23 +1,21 @@
-angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope', '$location', '$routeParams',
+angular.module('AppChat').controller('ChatMenuController', ['$http', '$log', '$scope', '$location', '$routeParams',
     function($http, $log, $scope, $location, $routeParams) {
         var thisCtrl = this;
 
-        this.msgHW = [];
-        this.messageList = [];
-        this.newText = "";
-        this.username= 2;
+        this.chatList = [];
+        this.chatHW = [];
 
-        this.loadMessages = function(){
-            thisCtrl.loadMessageDB().then(function(response){
-                thisCtrl.msgHW = response.data.MessagesFromChat;
-                var n=thisCtrl.msgHW.length;
-                $log.error("Message Loaded: ", JSON.stringify(thisCtrl.msgHW));
+        this.loadChats = function(){
+            thisCtrl.loadChatsDB().then(function(response){
+                thisCtrl.chatHW = response.data.ChatsList;
+                var n=thisCtrl.chatHW.length;
+                $log.error("Chat Loaded: ", JSON.stringify(thisCtrl.chatHW));
 
 
                 for(var i=n; i>=0; i--){
-                    var m = thisCtrl.msgHW[i];
-                    if (m!=null)
-                        thisCtrl.messageList.push({"id": m.MessageID, "text": m.Text, "author": m.Username, "like": m.Likes, "nolike": m.Dislikes});
+                    var c = thisCtrl.chatHW[i];
+                    if (c!=null)
+                        thisCtrl.chatList.push({"id": c.ChatID, "name": c.ChatName, "creator": c.Owner});
                 }
 
             }, function(error){
@@ -42,44 +40,21 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         };
 
-        this.loadMessageDB = function(){
+        this.loadChatsDB = function(){
             // Get the list of parts from the servers via REST API
 
             // First set up the url for the route
             //EEHW
-            var url = "http://localhost:5000/SocialMessagingApp/chat/message/1";
+            var url = "http://localhost:5000/SocialMessagingApp/chat";
             // Now set up the $http object
             // It has two function call backs, one for success and one for error
             return $http.get(url)
         };
 
-        this.postMsg = function(){
-            var msg = thisCtrl.newText;
-            // Need to figure out who I am
-            //EEHW
-            data = {'cid': 2, 'uid': 8, 'text': msg}
-            $http({
-                url: 'http://localhost:5000/SocialMessagingApp/message/post',
-                method: "PUT",
-                headers: { 'Content-Type': 'application/json' },
-                data: JSON.stringify(data)
-            }).then(function(response){
-                var m = response.data.Message;
-                thisCtrl.messageList.push({"id": m['mid'], "text": msg, "author": 'SALIO', "like": 0, "nolike": 0});
-            });
-            thisCtrl.newText = "";
-        };
 
-        this.loadLikesAndDislikes = function(){
-            window.location = "http://localhost:63343/SocialMessagingApp/pages/interactions.html";
-        };
+     //   this.loadLikesAndDislikes = function(){
+     //       window.location = "http://localhost:63343/SocialMessagingApp/pages/interactions.html";
+      //  };
 
-        this.likeadd= function(t) {
-            t.like++;
-        };
-        this.dislikeadd= function(t) {
-            t.nolike++;
-        };
 
-        this.loadMessages();
     }]);

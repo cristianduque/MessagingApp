@@ -57,7 +57,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             var msg = thisCtrl.newText;
             // Need to figure out who I am
             //EEHW
-            data = {'cid': 1, 'uid': 4, 'text': msg}
+            data = {'cid': 2, 'uid': 8, 'text': msg}
             $http({
                 url: 'http://localhost:5000/SocialMessagingApp/message/post',
                 method: "PUT",
