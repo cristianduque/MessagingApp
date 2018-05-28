@@ -14,7 +14,7 @@
     </style>
 
     <div id="left">
-        <form name="form" ng-submit="loginCtrl.login(login_username, login_password)" role="form">
+        <form name="form" ng-submit="loginCtrl.authenticateLogin(login_username, login_password)" role="form">
             <center><h5>LOGIN</h5></center>
             <div class="form-group">
                 <label for="username">Username</label>
@@ -35,7 +35,7 @@
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-danger">Login</button>
+                <button type="submit" class="btn btn-success">Login</button>
             </div>
         </form>
     </div>
@@ -98,7 +98,7 @@
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-danger">Register</button>
+                <button type="submit" class="btn btn-success">Register</button>
             </div>
         </form>
     </div>
