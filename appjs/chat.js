@@ -23,6 +23,10 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.username = mem.getItem('username');
         this.chatname = mem.getItem('chatname');
 
+        this.refresh = function () {
+            return;
+        }
+
         this.loadMessages = function(){
             thisCtrl.loadMessageDB().then(function(response){
                 thisCtrl.msgHW = response.data.MessagesFromChat;
