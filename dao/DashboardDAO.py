@@ -25,7 +25,7 @@ class DashboardDAO:
 
     def trendHash(self):
         cursor = self.conn.cursor()
-        query = 'select hashname from hashtag;'
+        query = 'select hashname, date(time), count(mid) from hashtag  natural inner join containhash natural inner join message group by hashname, date(time) order by count(mid) desc;'
         cursor.execute(query)
         result = []
         for m in cursor:
@@ -34,7 +34,7 @@ class DashboardDAO:
 
     def trendUser(self):
         cursor = self.conn.cursor()
-        query = 'select username from "user";'
+        query = 'select username, date(time), count(*) from "user" natural inner join message group by date(time), username order by date(time) desc;'
         cursor.execute(query)
         result = []
         for m in cursor:
@@ -43,33 +43,39 @@ class DashboardDAO:
 
     def numdislike(self):
         cursor = self.conn.cursor()
-        query = 'select count(*) from dislike;'
+        query = 'select count(*), date(time) from message natural inner join dislike group by date(time) order by date(time) desc;'
         cursor.execute(query)
-        return cursor.fetchone()
-
-    def numdislike(self):
-        cursor = self.conn.cursor()
-        query = 'select count(*) from dislike;'
-        cursor.execute(query)
-        return cursor.fetchone()
+        result = []
+        for m in cursor:
+            result.append(m)
+        return result
     
     def numlike(self):
         cursor = self.conn.cursor()
-        query = 'select count(*) from "like";'
+        query = 'select count(*), date(time) from message natural inner join "like" group by date(time) order by date(time) desc;'
         cursor.execute(query)
-        return cursor.fetchone()
+        result = []
+        for m in cursor:
+            result.append(m)
+        return result
     
     def numreply(self):
         cursor = self.conn.cursor()
-        query = 'select count(*) from reply;'
+        query = 'select count(*), date(time) from message as m,reply as r where m.mid=r.reply group by date(time) order by date(time) desc;'
         cursor.execute(query)
-        return cursor.fetchone()
+        result = []
+        for m in cursor:
+            result.append(m)
+        return result
 
     def nummessage(self):
         cursor = self.conn.cursor()
-        query = 'select count(*) from message;'
+        query = 'select count(*), date(time) from message group by date(time) order by date(time) desc;'
         cursor.execute(query)
-        return cursor.fetchone()
+        result = []
+        for m in cursor:
+            result.append(m)
+        return result
 
     def dashboardInfo(self):
         self.mostusedHashs()
@@ -81,3 +87,5 @@ class DashboardDAO:
     
     def activeUsers(self):
         self.partofHashboard.append(self.users)
+
+

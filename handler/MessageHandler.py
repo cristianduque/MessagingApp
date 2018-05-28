@@ -1,5 +1,5 @@
 from dao.MessageDAO import MessageDAO
-from flask import jsonify
+from flask import jsonify, make_response
 from dao.HashtagDAO import HashtagDao
 
 class MessageHandler:
@@ -8,8 +8,12 @@ class MessageHandler:
         mapped = {'MessageId': m[0], 'Message': m[1], 'Chat': m[2], 'Date': m[3], 'Username': m[4]}
         return mapped
 
+    def searchDic(self, m):
+        mapped = {'MessageId': m[3], 'Message': m[5], 'ChatId': m[2], 'UserId': m[4], 'Username': m[0], 'HashtagName': m[1]}
+        return mapped
+
     def mapChatMessage(self, m):
-        return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3], 'Likes': m[4], 'Dislikes': m[5]}
+        return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3], 'Likedby': m[4], 'Dislikedby': m[5], 'Reply': m[6], 'Likes': m[7], 'Dislikes': m[8], 'ReplyId': m[9]}
 
     def mapUserMessage(self, m):
         return {'Chatname': m[0], 'ChatID': m[1], 'MessageID': m[2], 'Time': m[3], 'Text': m[4]}
@@ -117,11 +121,59 @@ class MessageHandler:
         uid = msginfo['uid']
         cid = msginfo['cid']
         text = msginfo['text']
+        reply = msginfo['reply']
         m = MessageDAO().postmessage(cid, uid, text)
-        if not m:
+        pieces = text.split(" ")
+        hashtag = []
+        for txt in pieces:
+            if txt[0] == "#":
+                hash = txt[1:]
+                print(hash)
+                chk = self.hashExist(hash)
+                print(chk)
+                if chk == None:
+                    hid = MessageDAO().postHashtag(hash)
+                else:
+                    hid = chk
+                done = MessageDAO().insertHasHash(m, hid)
+        if reply != None:
+            t = MessageDAO().insertreply(reply, m)
+        result = {'mid': m}
+        return jsonify(result), 201
+
+    def hashExist(self, hash):
+        i = 0
+        for h in MessageDAO().hashtagList()[0]:
+            print(h)
+            if hash == h:
+                print(MessageDAO().hashtagList()[1][i])
+                return MessageDAO().hashtagList()[1][i]
+            i+=1
+        return None
+
+
+
+
+    def searchmsgwithhashinchat(self, cid, hashname):
+        searchresult = MessageDAO().searchHashInChatmsg(cid, hashname)
+        if not searchresult:
             return jsonify(Error="NOT FOUND"), 404
-        result = {'mid': m[0]}
-        return jsonify(Message=result)
+        result = []
+        for l in searchresult:
+            result.append(self.searchDic(l))
+        return jsonify(LikesInMessage=result)
+
+    def liked(self, likeinfo):
+        uid = likeinfo['uid']
+        mid = likeinfo['mid']
+        r = MessageDAO().insertlike(uid, mid)
+        return jsonify(Result=r), 200
+
+    def disliked(self, dislikeinfo):
+        uid = dislikeinfo['uid']
+        mid = dislikeinfo['mid']
+        r = MessageDAO().insertdislike(uid, mid)
+        return jsonify(Result=r), 200
 
     def mapdislikes(self, d):
         return {'userThatDisliked': d[0]}

@@ -46,6 +46,15 @@ class ChatHandler:
                 mapped_result.append(self.mapToUsersInChatDict(r))
             return jsonify(UsersInChat=mapped_result)
 
+    def addusertochat(self, cid, uid):
+        r = ChatDAO().addUsertoChat(cid, uid)
+        return jsonify(Result=r), 200
+
+    def createchat(self, owner, chatname):
+        cid = ChatDAO().addNewChat(chatname, owner)
+        r = self.addusertochat(cid, owner)
+        return r
+
     def mapToDict(self, row):
         result = {'cid': row[0], 'chatname': row[1]}
         return result

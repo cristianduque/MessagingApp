@@ -12,7 +12,7 @@
             controller: 'ChatController',
             controllerAs : 'chatCtrl'
         }).otherwise({
-            redirectTo: '/login'
+            redirectTo: '/dashboard'
         });
     }]);
     //
