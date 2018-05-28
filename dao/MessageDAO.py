@@ -46,12 +46,22 @@ class MessageDAO:
 
     def messageById(self, mid):
         cursor = self.conn.cursor()
-        query = 'select mid, text, chatname, time, username  from chat natural inner join message natural inner join "user" where mid=%s'
+        query = 'select mid, text, chatname, time, username  from chat natural inner join message natural inner join "user" where mid=%s;'
         cursor.execute(query, (mid, ))
         result = []
         for m in cursor:
             result.append(m)
         return result
+
+    def hashtagList(self):
+        cursor = self.conn.cursor()
+        query = 'select array_agg(hashname), array_agg(hid) from hashtag;'
+        cursor.execute(query)
+        result = cursor.fetchone()
+        self.conn.commit()
+        print(result)
+        return result
+
 
     def messagesFromChat(self, cid):
         cursor = self.conn.cursor()

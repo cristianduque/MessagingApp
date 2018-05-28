@@ -128,14 +128,31 @@ class MessageHandler:
         for txt in pieces:
             if txt[0] == "#":
                 hash = txt[1:]
-                hid = MessageDAO().postHashtag(hash)
+                print(hash)
+                chk = self.hashExist(hash)
+                print(chk)
+                if chk == None:
+                    hid = MessageDAO().postHashtag(hash)
+                else:
+                    hid = chk
                 done = MessageDAO().insertHasHash(m, hid)
         if reply != None:
-            print(reply)
-            print(m)
             t = MessageDAO().insertreply(reply, m)
         result = {'mid': m}
         return jsonify(result), 201
+
+    def hashExist(self, hash):
+        i = 0
+        for h in MessageDAO().hashtagList()[0]:
+            print(h)
+            if hash == h:
+                print(MessageDAO().hashtagList()[1][i])
+                return MessageDAO().hashtagList()[1][i]
+            i+=1
+        return None
+
+
+
 
     def searchmsgwithhashinchat(self, cid, hashname):
         searchresult = MessageDAO().searchHashInChatmsg(cid, hashname)

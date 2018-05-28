@@ -29,7 +29,6 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
 
         this.register = function(firstname, lastname, phone, email, password, username){
             var reqURL = "http://localhost:5000/SocialMessagingApp/register";
-                console.log("reqURL: " + reqURL);
                 var data = {'firstname': firstname, 'lastname': lastname, 'phone': phone, 'email': email, 'password': password, 'username': username}
                 // Now issue the http request to the rest API
                 $http.post(reqURL, data).then(
