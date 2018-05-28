@@ -7,10 +7,10 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
 
 
-        mem.setItem('uid', 3);
+        //mem.setItem('uid', 3);
         mem.setItem('cid', 1);
         mem.setItem('chatname', 'nena');
-        mem.setItem('username', 'kruiz');
+        //mem.setItem('username', 'kruiz');
 
 
         var thisCtrl = this;
@@ -26,11 +26,6 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.loadMessages = function(){
             thisCtrl.loadMessageDB().then(function(response){
                 thisCtrl.msgHW = response.data.MessagesFromChat;
-                console.log(response.data.MessagesFromChat);
-                console.log(thisCtrl.msgHW);
-                console.log(thisCtrl.msgHW[1]);
-                var un = thisCtrl.msgHW[1];
-                console.log(un);
 
                 var n=thisCtrl.msgHW.length;
                 //$log.error

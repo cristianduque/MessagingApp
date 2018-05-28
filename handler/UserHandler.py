@@ -9,12 +9,11 @@ class UserHandler:
         return result
 
     def mapToDict2(self, row):
-        result = {'uid': row[0], 'first_name': row[1], 'last_name': row[2], 'phone': row[3], 'email': row[4],
-                  'password': row[5], 'username': row[6]}
+        result = {'UserId': row[0], 'Username': row[6]}
         return result
 
     def mapToDict3(self, row):
-        result = {'username': row[0], 'password': row[1]}
+        result = {'UserId': row[0], 'Username': row[1]}
         return result
 
     def getAllUsers(self):
@@ -102,7 +101,7 @@ class UserHandler:
                 dao = UserDAO()
                 uid = dao.insertUser(firstname, lastname, phone, email, password, username)
                 result = self.mapToDict2([uid, firstname, lastname, phone, email, password, username])
-                return jsonify(Part=result), 201
+                return jsonify(User=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 

@@ -28,3 +28,7 @@ class ContactListHandler:
         for u in users:
             result.append(self.mapToDict(u))
         return jsonify(AllUsersInCOntactList=result)
+
+    def contactaddition(self, owner, uid):
+        dao = ContactListDAO().insertContacttoList(owner, uid)
+        return jsonify(Result=dao), 200

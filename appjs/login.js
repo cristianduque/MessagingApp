@@ -2,20 +2,19 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
     function($http, $log, $scope, $location, $routeParams) {
 
         var thisCtrl = this;
-        this.currentUser = {};
+        var mem = sessionStorage;
 
         this.checkLogin = function(username, password){
             var reqURL = "http://localhost:5000/SocialMessagingApp/login";
-                console.log("reqURL: " + reqURL);
                 var data = {'username': username, 'password': password}
                 // Now issue the http request to the rest API
                 $http.post(reqURL, data).then(
                     // Success function
                     function (response) {
-                        console.log("data: " + JSON.stringify(response.data));
-                        thisCtrl.currentUser = response.data;
-                        console.log(thisCtrl.currentUser);
-                        $location.path('/chat')
+                        var user = response.data.User;
+                        mem.setItem('username', user['Username']);
+                        mem.setItem('uid', user['UserId']);
+                        $location.path('/chat');
                     },
                 function (response){
                     // This is the error function
@@ -36,8 +35,9 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
                 $http.post(reqURL, data).then(
                     // Success function
                     function (response) {
-                        console.log("data: " + JSON.stringify(response.data));
-                        thisCtrl.currentUser = JSON.stringify(response.data);
+                        var user = response.data.User;
+                        mem.setItem('username', user['Username']);
+                        mem.setItem('uid', user['UserId']);
                         $location.path('/chat')
                     },
                     function (response){

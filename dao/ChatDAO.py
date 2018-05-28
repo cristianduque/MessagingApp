@@ -18,6 +18,20 @@ class ChatDAO:
         self.conn.close()
         return result
 
+    def addNewChat(self, chatname, uid):
+        cursor = self.conn.cursor()
+        query = 'insert into chat(chatname, owner) values(%s, %s) returning cid;'
+        cursor.execute(query, (chatname, uid))
+        result = cursor.fetchone()[0]
+        self.conn.commit()
+        return result
+
+    def addUsertoChat(self, cid, uid):
+        cursor = self.conn.cursor()
+        query = 'insert into participateschat values(%s,%s);'
+        cursor.execute(query, (uid, cid))
+        self.conn.commit()
+        return "Done"
 
     def getChat(self, cid):
         cursor = self.conn.cursor()
@@ -28,7 +42,6 @@ class ChatDAO:
             result.append(row)
         self.conn.close()
         return result
-
 
     def getOwnerOfChat(self, cid):
         cursor = self.conn.cursor()

@@ -8,6 +8,10 @@ class MessageHandler:
         mapped = {'MessageId': m[0], 'Message': m[1], 'Chat': m[2], 'Date': m[3], 'Username': m[4]}
         return mapped
 
+    def searchDic(self, m):
+        mapped = {'MessageId': m[3], 'Message': m[5], 'ChatId': m[2], 'UserId': m[4], 'Username': m[0], 'HashtagName': m[1]}
+        return mapped
+
     def mapChatMessage(self, m):
         return {'Username': m[0], 'MessageID': m[1], 'Time': m[2], 'Text': m[3], 'Likedby': m[4], 'Dislikedby': m[5], 'Reply': m[6], 'Likes': m[7], 'Dislikes': m[8], 'ReplyId': m[9]}
 
@@ -123,8 +127,9 @@ class MessageHandler:
         hashtag = []
         for txt in pieces:
             if txt[0] == "#":
-                
-
+                hash = txt[1:]
+                hid = MessageDAO().postHashtag(hash)
+                done = MessageDAO().insertHasHash(m, hid)
         if reply != None:
             print(reply)
             print(m)
@@ -132,18 +137,25 @@ class MessageHandler:
         result = {'mid': m}
         return jsonify(result), 201
 
+    def searchmsgwithhashinchat(self, cid, hashname):
+        searchresult = MessageDAO().searchHashInChatmsg(cid, hashname)
+        if not searchresult:
+            return jsonify(Error="NOT FOUND"), 404
+        result = []
+        for l in searchresult:
+            result.append(self.searchDic(l))
+        return jsonify(LikesInMessage=result)
+
     def liked(self, likeinfo):
         uid = likeinfo['uid']
         mid = likeinfo['mid']
         r = MessageDAO().insertlike(uid, mid)
-        print("tal veez llego aqui handler")
         return jsonify(Result=r), 200
 
     def disliked(self, dislikeinfo):
         uid = dislikeinfo['uid']
         mid = dislikeinfo['mid']
         r = MessageDAO().insertdislike(uid, mid)
-        print("tal veez llego aqui handler")
         return jsonify(Result=r), 200
 
     def mapdislikes(self, d):

@@ -14,6 +14,30 @@ class MessageDAO:
         self.conn.commit()
         return result
 
+    def postHashtag(self, hashtext):
+        cursor = self.conn.cursor()
+        query = 'insert into hashtag(hashname) values(%s) returning hid;'
+        cursor.execute(query, (hashtext, ))
+        result = cursor.fetchone()[0]
+        self.conn.commit()
+        return result
+
+    def insertHasHash(self, m, hid):
+        cursor = self.conn.cursor()
+        query = 'insert into containhash values(%s, %s);'
+        cursor.execute(query, (hid, m))
+        self.conn.commit()
+        return "Done"
+
+    def searchHashInChatmsg(self, cid, hashname):
+        cursor = self.conn.cursor()
+        query = 'select username, hashname, cid, mid, uid, text from "user" natural inner join message natural inner join containhash natural inner join hashtag natural inner join chat where cid=%s and hashname=%s;'
+        cursor.execute(query, (cid, hashname))
+        result = []
+        for m in cursor:
+            result.append(m)
+        return result
+
     def allMessages(self):
         cursor = self.conn.cursor()
         query = 'select  mid, text, chatname, time, username from chat natural inner join message natural inner join "user";'
