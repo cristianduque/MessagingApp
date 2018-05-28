@@ -1,28 +1,29 @@
-// Load the Visualization API and the piechart package.
-google.charts.load('current', {packages: ['corechart']});
+//Load the Visualization API and the piechart package.
+google.charts.load('current', {packages: ['corechart', 'bar']});
 // Set a callback to run when the Google Visualization API is loaded.;
 google.charts.setOnLoadCallback(drawChart);
 
-
-
 function reformatData(jsonData){
-    var temp= jsonData.Dashboard;
-    console.log("temp: " + JSON.stringify(temp));
+    var temp= jsonData.Dashboard.TrendingHash;
+    //console.log("temp: " + JSON.stringify(temp));
     var result = [];
     var i;
     var row;
     for (i=0; i < temp.length; ++i){
         row= temp[i]
         dataElement = [];
-        dataElement.push(row.id + '-' + row.name);
-        dataElement.push(row.count);
+        dataElement.push(row.Name);
+        dataElement.push(row.Count);
+        dataElement.push(row.Date)
         result.push(dataElement);
     }
-    console.log("Data: " + JSON.stringify(result));
+    //console.log("Data: " + JSON.stringify(result));
     return result;
 }
 
 function drawChart() {
+     dashCtrl = this;
+
     var jsonData = $.ajax({
         url: "http://localhost:5000/SocialMessagingApp/dashboard",
         dataType: "json",
@@ -36,7 +37,7 @@ function drawChart() {
     data.addColumn('string', 'Trend User');
     data.addColumn('number', 'Message number');
     data.addColumn('string', 'Date')
-    console.log((reformatData(JSON.parse(jsonData))))
+    //data.addColumn('string', 'Date')
     data.addRows(reformatData(JSON.parse(jsonData)));
 
     var options = {
@@ -50,12 +51,8 @@ function drawChart() {
             title: 'Trend User'
         }
     };
-
+    console.log(document.getElementById('chart_div'));
     var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-
     chart.draw(data, options);
 
 }
-
-google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawChart);

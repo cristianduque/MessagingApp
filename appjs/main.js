@@ -12,7 +12,9 @@
             controller: 'ChatController',
             controllerAs : 'chatCtrl'
         }).otherwise({
-            redirectTo: '/dashboard'
+            templateUrl: 'pages/dashboard.html',
+            controller: 'DashboardController',
+            controllerAs : 'dashCtrl'
         });
     }]);
     //
