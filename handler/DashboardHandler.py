@@ -3,25 +3,33 @@ from flask import jsonify
 
 class DashboardHandler:
     def dashboard(self):
-        dao = DashboardDAO().dashboardInfo()
-        if dao == None:
-            return jsonify(Error="NOT FOUND"), 404
-        mapped = self.mappedDashboard(dao)
-        return jsonify(Dashboard=mapped)
+        dao = DashboardDAO()
+        trendhash = dao.trendHash()
+        trenduser = dao.trendUser()
+        numlike = dao.numlike()
+        numdis = dao.numdislike()
+        numr = dao.numreply()
+        numm = dao.nummessage()
+        mapped = []
 
-    def mappedDashboard(self, d):
-        activeUsers = []
-        for u in d[5]:
-            activeUsers.append(self.mapToDict(u))
-        trendHash = []
-        for h in d[4]:
-            trendHash.append(self.maptoDicHash(h))
-        return {'Number Of Dislikes': d[0][0], 'Number Of Likes': d[1][0], 'Number Of Messages': d[2][0], 'Numbers Of Replies': d[3][0], 'Trending Hashtags': trendHash, 'Active Users': activeUsers}
+        return jsonify(Dashboard={"TrendingHash": self.appendName(trendhash), "TrendingUser": self.appendName(trenduser), "NumberOfLikes": self.appendCount(numlike), "NumberOfDislikes": self.appendCount(numdis), "NumberOfReplies": self.appendCount(numr), "NumberOfMessages": self.appendCount(numm)})
 
-    def mapToDict(self, row):
-        result = {'username': row[0]}
+    def appendName(self, m):
+        result = []
+        for r in m:
+            result.append(self.maptoName(r))
         return result
 
-    def maptoDicHash(self, h):
-        mapped = {'Hashtag': h[0]}
+    def appendCount(self, m):
+        result = []
+        for r in m:
+            result.append(self.mapNumCount(r))
+        return result
+
+    def maptoName(self, h):
+        mapped = {"Name": h[0], "Date": h[1], "Count": h[2]}
         return mapped
+
+    def mapNumCount(self, m):
+        return {"Count": m[0], "Date": m[1]}
+

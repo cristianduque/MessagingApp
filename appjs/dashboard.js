@@ -1,8 +1,9 @@
 // Load the Visualization API and the piechart package.
-google.charts.load('current', {'packages': ['corechart']});
-
-// Set a callback to run when the Google Visualization API is loaded.
+google.charts.load('current', {packages: ['corechart']});
+// Set a callback to run when the Google Visualization API is loaded.;
 google.charts.setOnLoadCallback(drawChart);
+
+
 
 function reformatData(jsonData){
     var temp= jsonData.Dashboard;
@@ -32,8 +33,10 @@ function drawChart() {
 
     // Create our data table out of JSON data loaded from server.
     var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Parts');
-    data.addColumn('number', 'Stock');
+    data.addColumn('string', 'Trend User');
+    data.addColumn('number', 'Message number');
+    data.addColumn('string', 'Date')
+    console.log((reformatData(JSON.parse(jsonData))))
     data.addRows(reformatData(JSON.parse(jsonData)));
 
     var options = {
@@ -44,7 +47,7 @@ function drawChart() {
             minValue: 0
         },
         vAxis: {
-            title: 'Part'
+            title: 'Trend User'
         }
     };
 
@@ -53,7 +56,6 @@ function drawChart() {
     chart.draw(data, options);
 
 }
-
 
 google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawChart);
