@@ -11,12 +11,23 @@
             templateUrl: 'pages/chat.html',
             controller: 'ChatController',
             controllerAs : 'chatCtrl'
-        }).otherwise({
+        }).when('/dashboard',{
             templateUrl: 'pages/dashboard.html',
-            //controller: 'DashboardController',
+            controller: 'DashboardController',
             controllerAs : 'dashCtrl'
+        }).when('/chatMenu',{
+            templateUrl: 'pages/chatmenu.html',
+            controller: 'ChatMenuController',
+            controllerAs : 'chatMenuCtrl'
+        }).when('/contacts', {
+            templateUrl: 'pages/contacts.html',
+            controller: 'ContactsController',
+            controllerAs : 'contactCtrl'
+        }).otherwise({
+            redirectTo: '/login'
         });
     }]);
     //
 
 })();
+

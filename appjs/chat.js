@@ -5,11 +5,9 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         var mem = sessionStorage;
 
-
-
         //mem.setItem('uid', 3);
-        mem.setItem('cid', 1);
-        mem.setItem('chatname', 'nena');
+        //mem.setItem('cid', 1);
+        //mem.setItem('chatname', 'nena');
         //mem.setItem('username', 'kruiz');
 
 
@@ -121,7 +119,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     list+= m.minfo.Likedby[i] + " \n";
                 alert(list);
             }
-            //window.location = "http://localhost:63343/SocialMessagingApp/pages/interactions.html";
+
         };
 
         this.likeadd= function(t) {
@@ -196,7 +194,17 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             });
             thisCtrl.newText = "";
 
-        }
+        };
+
+        this.refresh = function(){
+            var n=thisCtrl.messageList.length;
+            //$log.error
+            //console.log
+            for(var i=n; i>=0; i--) {
+                var t = thisCtrl.messageList.pop();
+                thisCtrl.loadMessages();
+            }
+        };
 
 
         this.loadMessages();

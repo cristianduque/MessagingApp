@@ -14,7 +14,7 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
                         var user = response.data.User;
                         mem.setItem('username', user['Username']);
                         mem.setItem('uid', user['UserId']);
-                        $location.path('/chat');
+                        $location.path('/chatMenu');
                     },
                 function (response){
                     // This is the error function
@@ -37,7 +37,7 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
                         var user = response.data.User;
                         mem.setItem('username', user['Username']);
                         mem.setItem('uid', user['UserId']);
-                        $location.path('/chat')
+                        $location.path('/chatMenu')
                     },
                     function (response){
                     // This is the error function

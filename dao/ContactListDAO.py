@@ -32,4 +32,5 @@ class ContactListDAO:
         query = 'insert into contactlist values(%s, %s);'
         cursor.execute(query, (owner, uid))
         self.conn.commit()
+        print("YA SE introdujo")
         return "Done"
