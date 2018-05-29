@@ -1,5 +1,5 @@
-angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope', '$window',
-    function($http, $log, $scope) {
+angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope', '$location', '$routeParams',
+    function($http, $log, $scope, $location, $routeParams) {
 
         // esto sesupone que va en loginpero lo tengo aqui para que all funcione
 
@@ -30,7 +30,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 //$log.error
                 //console.log
 
-                for(var i=n; i>=0; i--){
+                for(var i=n-1; i>=0; i--){
                     mr = thisCtrl.msgHW[i];
                     if (mr!=null)
                         if(mr.ReplyId == 0)
@@ -204,7 +204,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         };
 
         this.search = function () {
-            $location.path('/search')
+            $location.path('/search');
         }
 
 
