@@ -161,7 +161,7 @@ class MessageHandler:
         result = []
         for l in searchresult:
             result.append(self.searchDic(l))
-        return jsonify(LikesInMessage=result)
+        return jsonify(SearchHash=result)
 
     def liked(self, likeinfo):
         uid = likeinfo['uid']

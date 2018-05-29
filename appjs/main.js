@@ -19,6 +19,10 @@
             templateUrl: 'pages/chatmenu.html',
             controller: 'ChatMenuController',
             controllerAs : 'chatMenuCtrl'
+        }).when('/search',{
+            templateUrl: 'pages/search.html',
+            controller: 'SearchController',
+            controllerAs : 'searchCtrl'
         }).when('/contacts', {
             templateUrl: 'pages/contacts.html',
             controller: 'ContactsController',
