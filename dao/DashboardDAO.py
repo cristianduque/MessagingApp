@@ -25,8 +25,8 @@ class DashboardDAO:
 
     def trendHash(self):
         cursor = self.conn.cursor()
-        query = 'select hashname, date(time), count(mid) from hashtag  natural inner join containhash natural inner join message group by hashname, date(time) order by count(mid) desc;'
-        cursor.execute(query)
+        query = 'select hashname, count(*) from hashtag  natural inner join containhash natural inner join message where age(time)<=INTERVAL %s group by hashname order by count(*) desc limit 10;'
+        cursor.execute(query, ('7 days',))
         result = []
         for m in cursor:
             result.append(m)
@@ -34,8 +34,8 @@ class DashboardDAO:
 
     def trendUser(self):
         cursor = self.conn.cursor()
-        query = 'select username, date(time), count(*) from "user" natural inner join message group by date(time), username order by date(time) desc;'
-        cursor.execute(query)
+        query = 'select username, count(*) from "user" natural inner join message where age(time)<=INTERVAL %s group by username order by count(*) desc limit 10;'
+        cursor.execute(query, ('7 days',))
         result = []
         for m in cursor:
             result.append(m)
@@ -43,39 +43,28 @@ class DashboardDAO:
 
     def numdislike(self):
         cursor = self.conn.cursor()
-        query = 'select count(*), date(time) from message natural inner join dislike group by date(time) order by date(time) desc;'
-        cursor.execute(query)
+        query = 'select count(*) from message natural inner join dislike where age(time)<=INTERVAL %s;'
+        cursor.execute(query, ('7 days',))
         result = []
-        for m in cursor:
-            result.append(m)
-        return result
-    
+        return cursor.fetchone()[0]
+
     def numlike(self):
         cursor = self.conn.cursor()
-        query = 'select count(*), date(time) from message natural inner join "like" group by date(time) order by date(time) desc;'
-        cursor.execute(query)
-        result = []
-        for m in cursor:
-            result.append(m)
-        return result
-    
+        query = 'select count(*) from message natural inner join "like" where age(time)<=INTERVAL %s;'
+        cursor.execute(query, ('7 days',))
+        return cursor.fetchone()[0]
+
     def numreply(self):
         cursor = self.conn.cursor()
-        query = 'select count(*), date(time) from message as m,reply as r where m.mid=r.reply group by date(time) order by date(time) desc;'
-        cursor.execute(query)
-        result = []
-        for m in cursor:
-            result.append(m)
-        return result
+        query = 'select count(*) from message natural inner join reply where age(time)<=INTERVAL %s;'
+        cursor.execute(query, ('7 days',))
+        return cursor.fetchone()[0]
 
     def nummessage(self):
         cursor = self.conn.cursor()
-        query = 'select count(*), date(time) from message group by date(time) order by date(time) desc;'
-        cursor.execute(query)
-        result = []
-        for m in cursor:
-            result.append(m)
-        return result
+        query = 'select count(*) from message where age(time)<=INTERVAL %s;'
+        cursor.execute(query, ('7 days',))
+        return cursor.fetchone()[0]
 
     def dashboardInfo(self):
         self.mostusedHashs()

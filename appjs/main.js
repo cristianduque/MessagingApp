@@ -13,7 +13,7 @@
             controllerAs : 'chatCtrl'
         }).otherwise({
             templateUrl: 'pages/dashboard.html',
-            controller: 'DashboardController',
+            //controller: 'DashboardController',
             controllerAs : 'dashCtrl'
         });
     }]);

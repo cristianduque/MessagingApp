@@ -10,9 +10,7 @@ class DashboardHandler:
         numdis = dao.numdislike()
         numr = dao.numreply()
         numm = dao.nummessage()
-        mapped = []
-
-        return jsonify(Dashboard={"TrendingHash": self.appendName(trendhash), "TrendingUser": self.appendName(trenduser), "NumberOfLikes": self.appendCount(numlike), "NumberOfDislikes": self.appendCount(numdis), "NumberOfReplies": self.appendCount(numr), "NumberOfMessages": self.appendCount(numm)})
+        return jsonify(Dashboard={"TrendingHash": self.appendName(trendhash), "TrendingUser": self.appendName(trenduser), "NumberOfLikes": numlike, "NumberOfDislikes": numdis, "NumberOfReplies": numr, "NumberOfMessages": numm})
 
     def appendName(self, m):
         result = []
@@ -20,16 +18,8 @@ class DashboardHandler:
             result.append(self.maptoName(r))
         return result
 
-    def appendCount(self, m):
-        result = []
-        for r in m:
-            result.append(self.mapNumCount(r))
-        return result
 
     def maptoName(self, h):
-        mapped = {"Name": h[0], "Date": h[1], "Count": h[2]}
+        mapped = {"Name": h[0], "Count": h[1]}
         return mapped
-
-    def mapNumCount(self, m):
-        return {"Count": m[0], "Date": m[1]}
 
