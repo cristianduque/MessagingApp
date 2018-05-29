@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from handler.UserHandler import UserHandler
 from handler.ChatHandler import ChatHandler
 from handler.ContactListHandler import ContactListHandler
@@ -17,9 +17,15 @@ app.config["JSON_SORT_KEYS"] = False
 def home():
     return "Welcome Intruder!"
 
-@app.route('/SocialMessagingApp/login') #OK
+@app.route('/SocialMessagingApp/login', methods=['POST'])
 def login():
-    return "LOGIN GOES HERE"
+    if request.method == 'POST':
+        return UserHandler().getCredentials(request.get_json('data'))
+
+@app.route('/SocialMessagingApp/register', methods=['POST'])
+def register():
+    if request.method =='POST':
+        return UserHandler().insertUser(request.get_json('data'))
 
 @app.route('/SocialMessagingApp/') #OK
 def homeforApp():
@@ -150,16 +156,57 @@ def allContactList():
     handler = ContactListHandler()
     return handler.getAllContactLists()
 
+@app.route('/SocialMessagingApp/chat/hashtag/message/<int:cid>/<string:hashname>')
+def getChatHash(cid, hashname):
+    handler = MessageHandler()
+    return handler.searchmsgwithhashinchat(cid, hashname)
+
 @app.route('/SocialMessagingApp/chat/<int:cid>')
 def getChat(cid):
     handler = ChatHandler()
     return handler.getChat(cid)
 
-@app.route('/SocialMessagingApp/message/post', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/SocialMessagingApp/chat/adduser/<int:cid>/<int:uid>') #PUTMETHOD
+def addUsertochat(cid, uid):
+    handler = ChatHandler()
+    return handler.addusertochat(cid, uid)
+
+@app.route('/SocialMessagingApp/contactlist/adduser/<int:owner>/<int:uid>') #PUTMETHOD
+def addUsertoContactList(owner, uid):
+    handler = ContactListHandler()
+    return handler.contactaddition(owner, uid)
+
+@app.route('/SocialMessagingApp/chat/addchat/<int:owner>/<string:chatname>') #PUTMETHOD
+def createNewChat(owner, chatname):
+    handler = ChatHandler()
+    return handler.createchat(owner,chatname)
+
+@app.route('/SocialMessagingApp/message/post', methods=['PUT']) #withForm
 def postmessage():
+    handler = MessageHandler()
     if request.method == 'PUT':
-        MessageHandler().postmessageh(request.form)
-        return
+        m = handler.postmessageh(request.json)
+        return m[0]
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/SocialMessagingApp/message/like/insert', methods=['PUT']) #withForm
+def putlike():
+    handler = MessageHandler()
+    if request.method == 'PUT':
+        m = handler.liked(request.json)
+        print(m)
+        return m[0]
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/SocialMessagingApp/message/dislike/insert', methods=['PUT']) #withForm
+def putdislike():
+    handler = MessageHandler()
+    if request.method == 'PUT':
+        m = handler.disliked(request.json)
+        print(m)
+        return m[0]
     else:
         return jsonify(Error="Method not allowed."), 405
 

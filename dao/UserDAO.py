@@ -1,5 +1,7 @@
 from dao.MessageDAO import MessageDAO
+import subprocess
 import psycopg2
+import os
 from config.dbconfig import pg_config
 
 class UserDAO:
@@ -28,7 +30,7 @@ class UserDAO:
 
     def getAllUsers(self):
         cursor = self.conn.cursor()
-        query = 'select uid, firstname, lastname, phone, email, is_active, username from "user";'
+        query = 'select * from "user";'
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -48,7 +50,7 @@ class UserDAO:
 
     def getInformationOfUserById(self, uid):
         cursor = self.conn.cursor()
-        query = 'select uid, firstname, lastname, phone, email, is_active, username from "user" where uid = %s;'
+        query = 'select * from "user" where uid = %s;'
         cursor.execute(query, (uid, ))
         result = []
         for row in cursor:
@@ -58,10 +60,25 @@ class UserDAO:
 
     def getInformationOfUserByUsername(self, username):
         cursor = self.conn.cursor()
-        query = 'select uid, firstname, lastname, phone, email, is_active, username from "user" where username = %s;'
+        query = 'select username,password from "user" where username = %s;'
         cursor.execute(query, (username, ))
         result = []
         for row in cursor:
             result.append(row)
         self.conn.close()
         return result
+
+    def getCredentials(self, username, password):
+        cursor = self.conn.cursor()
+        query = 'select uid,username from "user" where username = %s and password = %s;'
+        cursor.execute(query, (username, password,))
+        result = cursor.fetchone()
+        return result
+
+    def insertUser(self, firstname, lastname, phone, email, password, username):
+        cursor = self.conn.cursor()
+        query = 'insert into "user"(firstname, lastname, phone, email, password, username) values (%s, %s, %s, %s, %s, %s) returning uid;'
+        cursor.execute(query, (firstname, lastname, phone, email, password, username,))
+        uid = cursor.fetchone()[0]
+        self.conn.commit()
+        return uid

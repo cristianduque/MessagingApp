@@ -6,17 +6,32 @@
         $routeProvider.when('/login', {
             templateUrl: 'pages/login.html',
             controller: 'LoginController',
-            controllerAs : 'logingCtrl'
+            controllerAs : 'loginCtrl'
         }).when('/chat', {
             templateUrl: 'pages/chat.html',
             controller: 'ChatController',
             controllerAs : 'chatCtrl'
-        })
-        //hay que a-dair aqui los when de cada mensaje y a donde va redirect
-        .otherwise({
-            redirectTo: '/chat'
+        }).when('/dashboard',{
+            templateUrl: 'pages/dashboard.html',
+            controller: 'DashboardController',
+            controllerAs : 'dashCtrl'
+        }).when('/chatMenu',{
+            templateUrl: 'pages/chatmenu.html',
+            controller: 'ChatMenuController',
+            controllerAs : 'chatMenuCtrl'
+        }).when('/search',{
+            templateUrl: 'pages/search.html',
+            controller: 'SearchController',
+            controllerAs : 'searchCtrl'
+        }).when('/contacts', {
+            templateUrl: 'pages/contacts.html',
+            controller: 'ContactsController',
+            controllerAs : 'contactCtrl'
+        }).otherwise({
+            redirectTo: '/login'
         });
     }]);
     //
 
 })();
+
