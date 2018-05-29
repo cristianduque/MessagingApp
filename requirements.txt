@@ -34,7 +34,6 @@ py2app==0.7.3
 pyasn1==0.4.3
 pyasn1-modules==0.2.1
 pycparser==2.18
-pyobjc-core==2.5.1
 pyobjc-framework-Accounts==2.5.1
 pyobjc-framework-AddressBook==2.5.1
 pyobjc-framework-AppleScriptKit==2.5.1
