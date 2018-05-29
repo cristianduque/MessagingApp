@@ -7,9 +7,11 @@ certifi==2018.4.16
 cffi==1.11.5
 chardet==3.0.4
 click==6.7
+config==0.3.9
 cryptography==2.2.2
 enum34==1.1.6
 Flask==0.12.2
+Flask-Cors==3.0.4
 google-assistant-grpc==0.2.0
 google-assistant-sdk==0.5.0
 google-auth==1.4.1
@@ -50,3 +52,5 @@ urllib3==1.22
 virtualenv==15.2.0
 Werkzeug==0.14.1
 zope.interface==4.1.1
+psycopg2==2.7.4
+psycopg2-binary==2.7.4
