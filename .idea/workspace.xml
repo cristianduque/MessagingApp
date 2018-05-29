@@ -37,8 +37,8 @@
       <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+            <state relative-caret-position="165">
+              <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -398,13 +398,6 @@
       <workItem from="1527525705558" duration="24000" />
       <workItem from="1527529633420" duration="513000" />
     </task>
-    <task id="LOCAL-00001" summary="commit">
-      <created>1521945875898</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1521945875898</updated>
-    </task>
     <task id="LOCAL-00002" summary="commit">
       <created>1521948588725</created>
       <option name="number" value="00002" />
@@ -741,7 +734,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527561751803</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Fixed requirements file">
+      <created>1527562084082</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1527562084083</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -856,7 +856,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix MessageDAO for UI purpose" />
     <MESSAGE value="fixed UserHandler" />
     <MESSAGE value="ContactList routes done" />
     <MESSAGE value="Fixed getMessagesByID" />
@@ -881,7 +880,8 @@
     <MESSAGE value="Fixed add contact to contact list route" />
     <MESSAGE value="Added requirements.txt file for heroku deployment" />
     <MESSAGE value="Added Procfile file to heroku deployment" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Procfile file to heroku deployment" />
+    <MESSAGE value="Fixed requirements file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed requirements file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1166,8 +1166,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+        <state relative-caret-position="165">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding />
         </state>
       </provider>
